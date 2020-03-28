@@ -6,10 +6,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </br></br></br></br></br>
                 <div class="user-profile">
                     <div class="dropdown user-pro-body">
-                         <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
+                         <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <?php if($this->auth_user->is_connected) : ?> <strong><?= $this->auth_user->username; ?></strong>
+                                <?php endif; ?>
+                                <span class="caret"></span></a>
                         <ul class="dropdown-menu animated flipInY">
                              
-                            <li><a href="login.html"><i class="fa fa-power-off"></i>Se déconnecter</a></li>
+                        <?php if($this->auth_user->is_connected) : ?>
+                        <li><?= anchor('deconnexion', "Déconnexion"); ?></li>
+          <?php else: ?>
+                        <li><?= anchor('connexion', "Connexion"); ?></li>
+          <?php endif; ?>
                         </ul>
                     </div>
                 </div>

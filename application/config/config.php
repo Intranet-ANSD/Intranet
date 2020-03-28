@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/stat/';
+
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -37,7 +38,7 @@ $config['base_url'] = 'http://localhost/stat/';
 $config['index_page'] = 'index.php';
 
 /*
-|--------------------------------------------------------------------------
+|--------------------------------------------------------------------------s
 | URI PROTOCOL
 |--------------------------------------------------------------------------
 |
@@ -76,6 +77,13 @@ $config['url_suffix'] = '';
 |
 */
 $config['language']	= 'english';
+
+$config['csrf_protection'] = TRUE;
+$config['csrf_token_name'] = 'csrf_token_name';
+$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_expire'] = 7200;
+$config['csrf_regenerate'] = TRUE;
+$config['csrf_exclude_uris'] = array();
 
 /*
 |--------------------------------------------------------------------------

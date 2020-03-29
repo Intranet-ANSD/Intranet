@@ -30,19 +30,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <!-- /input-group -->
                     </li>
-                    <li class="nav-small-cap m-t-10">--- Mon Compte</li>
+                    <li class="tab-current"><a href=""><?= anchor('blog/index', "Mon compte",['class' => "sticon ti-home"]) ?></a></li>
+ 
                     <li><a href="index.html" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Intranet</span></a></li>
                     <li>
                         <a href="inbox.html" class="waves-effect"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Article<span class="fa arrow"></span><span class="label label-rouded label-danger pull-right">Nouveau</span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="chat.html">Ajouter un article</a></li>
+                            <li><a href=""><?= anchor('blog/edition', "Nouvel article"); ?></a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#" class="waves-effect"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Applications autorisées<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">13</span> </span></a>
                         <ul class="nav nav-second-level">
+                        <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'admin') : ?>
+
                             <li><a href="panels-wells.html">Base de données</a></li>
                             <li><a href="panel-ui-block.html">Ressources humaines</a></li>
+                        <?php endif; ?>
                             <li><a href="buttons.html">Reseaux</a></li>
                             <li><a href="sweatalert.html">CELCOM</a></li>
                             

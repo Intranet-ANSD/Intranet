@@ -7,26 +7,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Mon Compte</h4>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                          <ol class="breadcrumb">
-                            <li><a href="#">Dashboard</a></li>
-                            <li class="active">Dashboard 1</li>
+                         <?= anchor('blog/index', "Liste des articles") ?>
+            <?= anchor(['blog', 'edition', $this->article->id], "Modifier") ?>
+            <?= anchor('blog/edition', "Nouvel article") ?>
+            <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'admin') : ?>
+
+    
+            
+            <?= anchor(['blog', 'suppression', $this->article->id], "Supprimer", ['id' => 'menu_delete_article']) ?>
+            
+    
+            <?php endif; ?>
                         </ol>
+                        </div>
+                     
                     </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
                 
-                <div id="page-wrapper">
+                
+        <div id="page-wrapper">
             <div class="container-fluid">
+                
                 <div class="row">
                     
-                <div class="col-xs-12">
+                    
+                    <div class="col-xs-12">
                         <div class="panel panel-default">
                             <div class="panel-heading"> <?= heading($title); ?>
-                             </div>
-                            <div class="panel-wrapper collapse in">
-                                <div class="panel-body">
+                            </div>
+                        <div class="panel-wrapper collapse in">
+                            <div class="panel-body">
                                     <p>
                                     <small>
        
@@ -42,16 +53,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </p>
                                   
                                 
-                                   </div>
-                                <div class="panel-footer">   <?= nice_date($this->article->date, 'd/m/Y'); ?> </div>
                             </div>
+                                <div class="panel-footer">   <?= nice_date($this->article->date, 'd/m/Y'); ?> </div>
                         </div>
                     </div>
-                                  </div>
+                    </div>
+              </div>
                     
 
-            </div>        
-</div> 
+            </div>       
+             
+        </div> 
+
                  
                 
                  
@@ -62,6 +75,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               
                 <!-- /.right-sidebar -->
             </div>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Suppression de l'article</h4>
+      </div>
+      <div class="modal-body" id="deleteModalContent">
+      </div>
+    </div>
+  </div>
+</div>
             <!-- /.container-fluid -->
             <footer class="footer text-center"> Abdoul Aziz Kebe </footer>
         </div>

@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><?= $this->auth_user->username; ?></strong></button>
                                                             <h4 class="modal-title" id="myModalLabel">Ajouter un article</h4>
                                                         </div>
                                                         <div class="modal-body">
@@ -35,18 +34,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                   </div>
                                                               </div>
 
-                                                                <div class="form-group">
-                                                      <div class="col-md-offset-2 col-md-10">
-                                          <?= form_submit("send", "Envoyer", ['class' => "btn btn-default"]); ?>
-                                                       </div>
-                                                                 </div>
+                                                              <div class="form-group">
+                                                        <?= form_submit("send", "Envoyer", ['class' => "btn btn-info waves-effect"]); ?>
+                                                        </div>
                                                             <?= form_close() ?>
                                                             </from>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Save</button>
-                                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
-                                                        </div>
+                                                       
                                                     </div>
                                                     <!-- /.modal-content -->
-                                                </div>
+                                                 

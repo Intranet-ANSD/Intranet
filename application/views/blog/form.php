@@ -92,8 +92,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript">
     $(document).ready(function() {
         $.toast({
-            heading: 'Welcome to Pixel admin',
-            text: 'Use the predefined ones, or specify a custom position object.',
+            heading: 'Bienvenue <?= $this->auth_user->username; ?> dans',
+            text: 'Intranet de ANSD',
             position: 'top-right',
             loaderBg: '#ff6849',
             icon: 'info',

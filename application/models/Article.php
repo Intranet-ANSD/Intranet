@@ -11,6 +11,7 @@ class Article extends CI_Model {
     protected $_id;
     protected $_status;
     protected $_title;
+    protected $_image;
 
     public function __construct() {
         parent::__construct();
@@ -44,6 +45,7 @@ class Article extends CI_Model {
         $this->_id = NULL;
         $this->_status = NULL;
         $this->_title = NULL;
+        $this->_image = NULL;
     }
 
     protected function get_property_alias() {
@@ -83,6 +85,10 @@ class Article extends CI_Model {
         return $this->_title;
     }
 
+    protected function get_property_image() {
+        return $this->_image;
+    }
+
     public function load($id, $show_hidden = FALSE) {
         $this->clear_data();
         $this->db
@@ -103,17 +109,41 @@ class Article extends CI_Model {
             $this->_id = $data->id;
             $this->_status = $data->status;
             $this->_title = $data->title;
+            $this->_image = $data->image;
         }
     }
 
     public function save() {
-        $data = [
-            'alias' => $this->_alias,
-            'author_id' => $this->_author_id,
-            'content' => $this->_content,
-            'status' => $this->_status,
-            'title' => $this->_title
-        ];
+         
+            $data['alias'] = $this->_alias;
+            $data['author_id'] = $this->_author_id;
+            $data['content'] = $this->input->post('content');
+            $data['status'] = $this->input->post('status');
+            $data['title'] = $this->input->post('title');
+                    
+                        
+                   
+                   //Ajout d'une image
+         
+           if(isset($_FILES['image']['name']))
+           {
+               $this->load->library('upload');
+               $config['upload_path'] = APPPATH.'../uploads/';
+               $config['allowed_types'] = 'gif|jpg|png';
+               $config['file_name'] = date('YmdHms').'_'.rand(1,999999);
+               $this->upload->initialize($config);
+               if($this->upload->do_upload('image'))
+               {
+                   $uploaded = $this->upload->data();
+                   $data['image'] = $uploaded['file_name'];
+                   $this->resize_image(APPPATH.'../uploads/'.$data['image'],900);
+                   $this->createThumbnail(APPPATH.'../uploads/'.$data['image'],APPPATH.'../uploads/thumbnail/'.$data['image'],400,300);
+                   //$data['image'] = 
+               }
+           }
+           //Fin Ajout d'image
+        
+        
         if ($this->is_found) {
             $this->db->where('id', $this->_id)
                      -> update('article', $data);
@@ -124,6 +154,38 @@ class Article extends CI_Model {
             $this->load($id, TRUE);
         }
     }
+    //Fin save
+
+
+    //traitement de l'image
+    function resize_image($source,$width)
+	{
+		$config['image_library'] = 'gd2';
+		$config['source_image'] = $source;
+		$config['maintain_ratio'] = TRUE;
+		$config['width']         = $width;
+
+		$this->load->library('image_lib', $config);
+
+		$this->image_lib->resize();
+		$this->image_lib->clear();
+	}
+	function createThumbnail($source,$destination,$width,$height)
+	{
+		$this->load->library('image_lib');
+		$config['image_library'] = 'gd2';
+		$config['source_image'] = $source;
+		$config['new_image'] = $destination;
+		$config['maintain_ratio'] = FALSE;
+		$config['width']         = $width;
+		$config['height'] = $height;
+
+		$this->image_lib->initialize($config);
+
+		$this->image_lib->resize();
+		$this->image_lib->clear();
+	}
+    //Fin traitement de l'image
 
     protected function set_property_author_id($author_id) {
         $this->_author_id = $author_id;
@@ -131,6 +193,9 @@ class Article extends CI_Model {
 
     protected function set_property_content($content) {
         $this->_content = $content;
+    }
+    protected function set_property_image($image) {
+        $this->_image = $image;
     }
 
     protected function set_property_status($status) {

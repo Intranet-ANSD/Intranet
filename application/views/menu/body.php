@@ -77,15 +77,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-                <div id="page-wrapper">
-            <div class="container-fluid">
+                 
+            <div class="">
                 <div class="row">
                     
                 <?php if ($this->articles->has_items) : ?>
                                  <?php foreach($this->articles->items as $article) {
                                      $this->load->view('blog/article_resume', $article);
+                                     
                                  }
+                                 
                                     ?>
+                                   
                                   <?php else: ?>
                                          <div class="col-md-12">
                                         <p class="alert alert-warning" role="alert">
@@ -93,11 +96,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </p>
                                          </div>
                                   <?php endif; ?>
-                                  </div>
+                  </div>
                     
 
             </div>        
-</div> 
+  
                  
                 
                  

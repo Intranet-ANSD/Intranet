@@ -32,7 +32,7 @@ class Articles extends CI_Model {
     }
     //Charger les articles
     public function load($show_hidden = FALSE) {
-        $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date, status, author ")
+        $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
                  -> order_by('date', 'DESC');
         if (!$show_hidden) {

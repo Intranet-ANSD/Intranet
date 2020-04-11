@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             <h4 class="modal-title" id="myModalLabel">Ajouter un article</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                        <?= form_open(uri_string(), ['class' => 'form-horizontal']); ?>
+                                                        <?= form_open_multipart(uri_string(), ['class' => 'form-horizontal']); ?>
                                                             <from class="form-horizontal">
                                                             <div class="form-group">
                                          <?= form_label("Titre&nbsp;:", "title", ['class' => "col-md-2 control-label"]) ?>
@@ -33,6 +33,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                              <span class="help-block"><?= form_error('status'); ?></span>
                                                   </div>
                                                               </div>
+
+                                                              <div class="form-group">
+		                                    	<div class="row">
+				                            <label class="col-md-3">Image</label>
+				                                    <div class="col-md-9">
+				                        	<input type="file" name="image" class="form-control">
+				                                    </div>
+				                                         <div class="clearfix"></div>
+		                                    	</div>
+		                                                       </div>
 
                                                               <div class="form-group">
                                                         <?= form_submit("send", "Envoyer", ['class' => "btn btn-info waves-effect"]); ?>

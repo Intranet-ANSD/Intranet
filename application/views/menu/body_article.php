@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div id="page-wrapper">
+ 
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -74,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!-- .right-sidebar -->
               
                 <!-- /.right-sidebar -->
-            </div>
+            
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

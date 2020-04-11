@@ -3,9 +3,9 @@ $article_url = 'blog/' . $alias . '_' . $id;
 ?>
 
                      
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"> <?= heading(anchor($article_url, htmlentities($title)), 2); ?>
+                            <div class="panel-heading"> <?= heading(anchor($article_url, htmlentities($title)), 4); ?>
                              </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
@@ -14,12 +14,18 @@ $article_url = 'blog/' . $alias . '_' . $id;
        
       <?= $author ?>
       <?php if ($this->auth_user->is_connected) : ?>
-        -
+        
         <?= $this->article_status->label[$status]; ?>
+        
       <?php endif; ?>
     </small>           
+                        
                                      </p>
+                                    <div class="">
+                         <img class="img-fluid" src="<?php echo base_url('uploads/thumbnail/'.$image);?>">
+                                    </div>            
                         <p>
+                        
                              <?= nl2br(htmlentities($content)); ?>... <?= anchor($article_url, "Lire la suite"); ?>
                         </p>
                                   

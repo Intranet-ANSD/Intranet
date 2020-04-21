@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
- 
+                  
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Mon Compte</h4>
+                        <h4 class="page-title"></h4>
                     </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                          <ol class="breadcrumb">
@@ -36,7 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="panel panel-default">
                             <div class="panel-heading"> <?= heading($title); ?>
                             </div>
+                <div class>
+                <img src="<?php echo base_url('uploads/thumbnail/'.$this->article->image);?>" class="img-fluid" >
                         <div class="panel-wrapper collapse in">
+                
                             <div class="panel-body">
                                     <p>
                                     <small>

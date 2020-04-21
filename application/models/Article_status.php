@@ -7,18 +7,20 @@ class Article_status {
 
     public function __construct() {
         $this->_status = [
-            'W' => [
-                  'text' => 'Brouillon',
-                  'decoration' => 'warning'
-              ],
-              'P' => [
-                  'text' => 'Publié',
+            'N' => [
+                'text' => 'Non soumis',
+                'decoration' => 'danger'
+                   ]/*,
+              'S' => [
+                  'text' => 'soumis',
                   'decoration' => 'primary'
               ],
-              'D' => [
-                  'text' => 'Supprimé',
-                  'decoration' => 'danger'
-              ]
+              
+              'A' => [
+                'text' => 'Attente',
+                'decoration' => 'warning'
+                     ]
+                     */
         ];
     }
 

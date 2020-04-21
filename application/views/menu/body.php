@@ -42,15 +42,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-megna">
-                                    <h1 class="text-white counter">2</h1>
-                                    <p class="text-white">Consulter mes articles</p>
+                                    <h1 class="text-white counter"><?= $this->articles->num_items; ?></h1>
+                                    <p class="text-white">Non soumis</p>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-inverse">
-                                    <h1 class="text-white counter">2</h1>
+                                    <h1 class="text-white counter">?</h1>
                                     <p class="text-white">Soumis</p>
                                 </div>
                             </div>
@@ -58,15 +58,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-info">
-                                    <h1 class="counter text-white">2</h1>
-                                    <p class="text-white">En cours</p>
+                                    <h1 class="counter text-white">?</h1>
+                                    <p class="text-white">En attente</p>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-danger">
-                                    <h1 class="text-white counter">6</h1>
+                                    <h1 class="text-white counter">?</h1>
                                     <p class="text-white">Rejetés</p>
                                 </div>
                             </div>

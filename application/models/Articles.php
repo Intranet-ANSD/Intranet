@@ -35,8 +35,10 @@ class Articles extends CI_Model {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
                  -> order_by('date', 'DESC');
+                 $this->db->where('author', $this->session->auth_user['username']);
         if (!$show_hidden) {
-            $this->db->where('status', 'P');
+            $this->db->where('status', 'N');
+           
         }
         $this->_list = $this->db->get()-> result();
     }

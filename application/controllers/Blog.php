@@ -72,7 +72,7 @@ class Blog extends CI_Controller {
     $this->load->view('blog/index', $data);
     
   }
-
+/*
   public function publication($id = NULL) {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
@@ -89,7 +89,7 @@ class Blog extends CI_Controller {
     $this->article->status = 'P';
     $this->article->save();
     redirect('blog/' . $this->article->alias . '_' . $id);
-  }
+  }*/
 
   protected function set_blog_post_validation() {
     $list = join(',', $this->article_status->codes);

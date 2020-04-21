@@ -12,10 +12,10 @@ $article_url = 'blog/' . $alias . '_' . $id;
                                     <p>
                                     <small>
        
-      <?= $author ?>
+      
       <?php if ($this->auth_user->is_connected) : ?>
         
-        <?= $this->article_status->label[$status]; ?>
+        <?= $this->article_status->label[$status]; ?> par:&nbsp <?= $author ?>
         
       <?php endif; ?>
     </small>           
@@ -24,6 +24,7 @@ $article_url = 'blog/' . $alias . '_' . $id;
                                     <div class="">
                          <img class="img-fluid" src="<?php echo base_url('uploads/thumbnail/'.$image);?>">
                                     </div>            
+                                    </br>
                         <p>
                         
                              <?= nl2br(htmlentities($content)); ?>... <?= anchor($article_url, "Lire la suite"); ?>

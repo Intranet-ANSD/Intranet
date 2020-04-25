@@ -10,17 +10,17 @@ class Article_status {
             'N' => [
                 'text' => 'Non soumis',
                 'decoration' => 'danger'
-                   ]/*,
+                   ],/*,
               'S' => [
                   'text' => 'soumis',
                   'decoration' => 'primary'
               ],
-              
-              'A' => [
-                'text' => 'Attente',
+              */
+              'B' => [
+                'text' => 'Brouillon',
                 'decoration' => 'warning'
                      ]
-                     */
+                     
         ];
     }
 

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Article extends CI_Model {
+class Communique extends CI_Model {
 
     protected $_alias;
     protected $_author;
@@ -9,7 +9,6 @@ class Article extends CI_Model {
     protected $_content;
     protected $_date;
     protected $_id;
-    protected $_status;
     protected $_title;
     protected $_image;
 
@@ -43,7 +42,6 @@ class Article extends CI_Model {
         $this->_content = NULL;
         $this->_date = NULL;
         $this->_id = NULL;
-        $this->_status = NULL;
         $this->_title = NULL;
         $this->_image = NULL;
     }
@@ -77,9 +75,6 @@ class Article extends CI_Model {
 
     }
 
-    protected function get_property_status() {
-        return $this->_status;
-    }
 
     protected function get_property_title() {
         return $this->_title;
@@ -92,11 +87,9 @@ class Article extends CI_Model {
     public function load($id, $show_hidden = FALSE) {
         $this->clear_data();
         $this->db
-             ->from('article_username')
+             ->from('communique_username')
              ->where('id', $id);
-        if (!$show_hidden) {
-            $this->db->where('status', 'P');
-        }
+        
         $data = $this->db
                      ->get()
                      ->first_row();
@@ -107,7 +100,6 @@ class Article extends CI_Model {
             $this->_content = $data->content;
             $this->_date = $data->date;
             $this->_id = $data->id;
-            $this->_status = $data->status;
             $this->_title = $data->title;
             $this->_image = $data->image;
         }
@@ -118,7 +110,6 @@ class Article extends CI_Model {
             $data['alias'] = $this->_alias;
             $data['author_id'] = $this->_author_id;
             $data['content'] = $this->input->post('content');
-            $data['status'] = $this->input->post('status');
             $data['title'] = $this->input->post('title');
                     
                         
@@ -146,10 +137,10 @@ class Article extends CI_Model {
         
         if ($this->is_found) {
             $this->db->where('id', $this->_id)
-                     -> update('article', $data);
+                     -> update('communique', $data);
         } else {
             $data['date'] = date('Y-m-d H:i:s');
-            $this->db->insert('article', $data);
+            $this->db->insert('communique', $data);
             $id = $this->db->insert_id();
             $this->load($id, TRUE);
         }
@@ -198,10 +189,6 @@ class Article extends CI_Model {
         $this->_image = $image;
     }
 
-    protected function set_property_status($status) {
-        $this->_status = $status;
-    }
-
     protected function set_property_title($title) {
         $alias = url_title($title, 'underscore', TRUE);
         $this->_title = $title;
@@ -210,7 +197,7 @@ class Article extends CI_Model {
 
     public function delete() {
         if ($this->is_found) {
-            $this->_status = 'B';
+//            $this->_status = 'B';
             $this->save();
         }
     }

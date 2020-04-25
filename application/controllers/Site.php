@@ -37,9 +37,12 @@ class Site extends My_Controller {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $this->auth_user->login( $username, $password);
-            if($this->auth_user->is_connected) {
+            if(($this->auth_user->is_connected && $this->session->auth_user['username'] == 'admin' || $this->session->auth_user['username'] == 'Abdoul')) {
                 redirect('blog/index');
-            } else {
+            } else if(($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe')) {
+                redirect('celcom/index');
+            }
+            else{
                 $data['login_error'] = "Échec de l'authentification";
             }
         }

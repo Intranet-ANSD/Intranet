@@ -38,7 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		                                    	<div class="row">
 				                            <label class="col-md-3">Image</label>
 				                                    <div class="col-md-9">
-				                        	<input type="file" name="image" class="form-control">
+                                                    <input type='file' class="form-control" name="image" onChange="readURL(this);" /required>
+                                                    <img id="blah" src="<?php echo base_url(); ?>uploads/" alt="" height="200" width="200"/>
 				                                    </div>
 				                                         <div class="clearfix"></div>
 		                                    	</div>
@@ -48,6 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <?= form_submit("send", "Envoyer", ['class' => "btn btn-info waves-effect"]); ?>
                                                         </div>
                                                             <?= form_close() ?>
+                                                            <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
                                                             </from>
                                                         </div>
                                                        

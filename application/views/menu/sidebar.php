@@ -30,13 +30,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <!-- /input-group -->
                     </li>
+                    <?php if($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
+                    <li class="tab-current"><a href=""><?= anchor('celcom/index', "Mon compte (Celcom)",['class' => "sticon ti-home"]) ?></a></li>
+                    <?php endif;?>
                     <li class="tab-current"><a href=""><?= anchor('blog/index', "Mon compte",['class' => "sticon ti-home"]) ?></a></li>
  
                     <li><a href="index.html" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Intranet</span></a></li>
                     <li>
                         <a href="inbox.html" class="waves-effect"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Article<span class="fa arrow"></span><span class="label label-rouded label-danger pull-right">Nouveau</span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href=""><?= anchor('blog/edition', "Nouvel article"); ?></a></li>
+                        <?php if($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
+                            <li><a href=""><?= anchor('celcom/edition', "Nouvel communique"); ?></a></li>
+                        <?php endif; ?>
+                        <li><a href=""><?= anchor('blog/edition', "Nouvel article"); ?></a></li>
+
                         </ul>
                     </li>
                     <li>

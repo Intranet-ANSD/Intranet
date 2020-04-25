@@ -25,6 +25,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?php echo base_url('ressources/css/style.css" rel="stylesheet');?>">
     <!-- color CSS -->
     <link href="<?php echo base_url('ressources/css/colors/default.css" id="theme" rel="stylesheet');?>">
+    <link href="<?php echo base_url('ressources/plugins/bower_components/footable/css/footable.core.css" rel="stylesheet');?>">
+    <link href="<?php echo base_url('ressources/plugins/bower_components/bootstrap-select/bootstrap-select.min.css" rel="stylesheet');?>" />
+    <!-- Dropzone css -->
+    <link href="<?php echo base_url('ressources/plugins/bower_components/dropzone-master/dist/dropzone.css" rel="stylesheet" type="text/css');?>" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php $this->load->view('menu/sidebar.php') ?>
         <!-- Left navbar-header end -->
         <!-- Page Content -->
-        <?php $this->load->view('menu/body_article') ?>
+        <?php $this->load->view('menu/ajout_article') ?>
 
         <!--pour les articles -->
          
@@ -77,6 +81,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url('ressources/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js');?>"></script>
     <script src="<?php echo base_url('ressources/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js');?>"></script>
     <script src="<?php echo base_url('ressources/plugins/bower_components/toast-master/js/jquery.toast.js');?>"></script>
+    <script src="<?php echo base_url('ressources/plugins/bower_components/footable/js/footable.all.min.js');?>"></script>
+    <script src="<?php echo base_url('ressources/plugins/bower_components/bootstrap-select/bootstrap-select.min.js" type="text/javascript');?>"></script>
+    <!--FooTable init-->
+    <script src="<?php echo base_url('ressources/js/footable-init.js');?>"></script>
+    <!-- Custom Theme JavaScript -->
+     
+    <!--Style Switcher -->
+    <script src="<?php echo base_url('ressources/plugins/bower_components/styleswitcher/jQuery.style.switcher.js');?>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $.toast({

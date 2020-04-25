@@ -1,13 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Articles extends CI_Model {
+class ListerCommunique extends CI_Model {
 
-    protected $_list;
-
+    protected $_listC;
+    
     public function __construct() {
         parent::__construct();
-        $this->_list = [];
+        $this->_listC = [];
+    
     }
 
     public function __get($key) {
@@ -19,27 +20,37 @@ class Articles extends CI_Model {
         }
     }
         //verifie s'il y'a article ou pas
-    protected function get_property_has_items() {
-        return count($this->_list) > 0;
+    protected function get_property_has_itemsC() {
+        return count($this->_listC) > 0;
     }
+
+    
+    
+    
+
     //retourne la liste des articles
-    protected function get_property_items() {
-        return $this->_list;
+    protected function get_property_itemsC() {
+        return $this->_listC;
     }
+
+
+    
     //le nombre d'articles
-    protected function get_property_num_items() {
-        return count($this->_list);
+    protected function get_property_num_itemsC() {
+        return count($this->_listC);
     }
-    //Charger les articles
+
+    
+    //Charger tous les articles
     public function load($show_hidden = FALSE) {
-        $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
-                 ->from('article_username')
+        $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image,author ")
+                 ->from('communique_username')
                  -> order_by('date', 'DESC');
                  $this->db->where('author', $this->session->auth_user['username']);
-        if (!$show_hidden) {
-            $this->db->where('status', 'N');
-           
-        }
-        $this->_list = $this->db->get()-> result();
+
+        $this->_listC = $this->db->get()-> result();
     }
+
+
+
 }

@@ -16,7 +16,7 @@ class Blog extends CI_Controller {
       $data['title'] = htmlentities($this->article->title);
       $data['script'] = '<script src="' . base_url('js/article.js') . '"></script>';
       
-      $this->load->view('blog/article', $data);
+      $this->load->view('blog/index_article_details', $data);
       
     } else {
       redirect('blog/index');
@@ -57,19 +57,26 @@ class Blog extends CI_Controller {
       }
     }
     
-    $this->load->view('blog/form', $data);
+    $this->load->view('blog/index_ajout', $data);
     
   }
 
   public function index() {
     $this->load->helper('html');
     $this->load->helper('date');
-    $this->load->model('articles');
+    $this->load->model('listerarticles');
     $this->load->model('article_status');
-    $this->articles->load($this->auth_user->is_connected);
+    $this->listerarticles->load($this->auth_user->is_connected);
+    $this->listerarticles->brouillon($this->auth_user->is_connected);
+    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
     $data['title'] = "Blog";
-    
+    if ($this->auth_user->is_connected)
+    {
     $this->load->view('blog/index', $data);
+    }
+    else {
+      $this->load->view('site/connexion');
+    }
     
   }
 /*

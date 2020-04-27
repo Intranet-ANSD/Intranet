@@ -50,8 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-inverse">
-                                    <h1 class="text-white counter">?</h1>
-                                    <p class="text-white">Soumis</p>
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsvalide; ?></h1>
+                                    <p class="text-white">Validé</p>
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -66,8 +66,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-danger">
-                                    <h1 class="text-white counter">?</h1>
-                                    <p class="text-white">Rejetés</p>
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsattente; ?></h1>
+                                    <p class="text-white">En Attente</p>
                                 </div>
                             </div>
                             <!-- /.col -->

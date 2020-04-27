@@ -210,8 +210,9 @@ class Article extends CI_Model {
 
     public function delete() {
         if ($this->is_found) {
-            $this->_status = 'B';
+            $this->_status = 'N';
             $this->save();
         }
+        
     }
 }

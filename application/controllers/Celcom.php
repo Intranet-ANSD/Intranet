@@ -7,6 +7,29 @@ class Celcom extends CI_Controller {
         $this->load->helper('html');
         $this->load->helper('date');
         $this->load->model('listercommunique');
+        $this->load->model('listerarticles');
+        $this->load->model('demande_status');
+        $this->listerarticles->demande($this->auth_user->is_connected);
+       // $this->listercommunique->load($this->auth_user->is_connected);
+        $this->listerarticles->valider($this->auth_user->is_connected);
+        $this->listerarticles->rejeter($this->auth_user->is_connected);
+        $this->listerarticles->attente($this->auth_user->is_connected);
+        $data['title'] = "Celcom";
+        if ($this->auth_user->is_connected)
+        {
+        $this->load->view('blog/index', $data);
+        }
+        else {
+          $this->load->view('site/connexion');
+        }
+        
+      }
+      /*
+      pour communique
+      public function index() {
+        $this->load->helper('html');
+        $this->load->helper('date');
+        $this->load->model('listercommunique');
         $this->listercommunique->load($this->auth_user->is_connected);
         $data['title'] = "Celcom";
         if ($this->auth_user->is_connected)
@@ -18,6 +41,7 @@ class Celcom extends CI_Controller {
         }
         
       }
+      */
 
       public function edition($id = NULL) {
         if (!$this->auth_user->is_connected) {

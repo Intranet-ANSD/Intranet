@@ -1,26 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Article_status {
+class Demande_status {
 
     protected $_status;
 
     public function __construct() {
         $this->_status = [
-            'N' => [
-                'text' => 'Non soumis',
-                'decoration' => 'danger'
+            'V' => [
+                'text' => 'Valide',
+                'decoration' => 'primary'
                    ],
                    
-              'B' => [
-                'text' => 'Brouillon',
-                'decoration' => 'warning'
+              'R' => [
+                'text' => 'rejete',
+                'decoration' => 'danger'
                      ]
                      ,
                    
-              'S' => [
-                'text' => 'Soumis',
-                'decoration' => 'primary'
+              'A' => [
+                'text' => 'Attente',
+                'decoration' => 'warning'
                      ]
                      
         ];

@@ -13,11 +13,24 @@ $article_url = 'blog/' . $alias . '_' . $id;
                                     <small>
        
       
-      <?php if ($this->auth_user->is_connected) : ?>
+       <?= $author ?>
+       <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
+
         
-        <?= $this->article_status->label[$status]; ?> par:&nbsp <?= $author ?>
+        <?= $this->article_status->label[$status]; ?>
         
       <?php endif; ?>
+
+    <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
+
+        
+        <?= $this->demande_status->label[$status]; ?>
+
+    <?php endif; ?>
+
+      
+      
+
     </small>           
                         
                                      </p>

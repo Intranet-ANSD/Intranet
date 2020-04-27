@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><?= $this->auth_user->username; ?></strong></button>
-                                                            <h4 class="modal-title" id="myModalLabel">Ajouter un article</h4>
+                                                            <h4 class="modal-title" id="myModalLabel">Gestion article</h4>
                                                         </div>
                                                         <div class="modal-body">
                                                         <?= form_open_multipart(uri_string(), ['class' => 'form-horizontal']); ?>
@@ -25,6 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                   <span class="help-block"><?= form_error('content'); ?></span>
                                               </div>
                                                             </div>  
+                                                            <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
 
                                                              <div class="form-group">
                                          <?= form_label("Statut&nbsp;:", "status", ['class' => "col-md-2 control-label"]) ?>
@@ -33,6 +34,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                              <span class="help-block"><?= form_error('status'); ?></span>
                                                   </div>
                                                               </div>
+                                                            <?php endif; ?>
+
+                                                            <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
+
+                                                                <div class="form-group">
+                                         <?= form_label("Statut&nbsp;:", "status", ['class' => "col-md-2 control-label"]) ?>
+                                                 <div class="col-md-10 <?= empty(form_error('status')) ? "" : "has-error" ?>">
+                                          <?= form_dropdown("status", $this->demande_status->text, set_value('status', $this->article->status), ['id' => "content", 'class' => 'form-control']) ?>
+                                             <span class="help-block"><?= form_error('status'); ?></span>
+                                                  </div>    
+                                                            <?php endif; ?>
+
+
 
                                                               <div class="form-group">
 		                                    	<div class="row">

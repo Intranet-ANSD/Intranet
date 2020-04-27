@@ -8,6 +8,7 @@ class ListerCommunique extends CI_Model {
     public function __construct() {
         parent::__construct();
         $this->_listC = [];
+       
     
     }
 
@@ -27,11 +28,14 @@ class ListerCommunique extends CI_Model {
     
     
     
+    
 
     //retourne la liste des articles
     protected function get_property_itemsC() {
         return $this->_listC;
     }
+
+    
 
 
     
@@ -39,7 +43,7 @@ class ListerCommunique extends CI_Model {
     protected function get_property_num_itemsC() {
         return count($this->_listC);
     }
-
+    
     
     //Charger tous les articles
     public function load($show_hidden = FALSE) {
@@ -51,6 +55,6 @@ class ListerCommunique extends CI_Model {
         $this->_listC = $this->db->get()-> result();
     }
 
-
+   
 
 }

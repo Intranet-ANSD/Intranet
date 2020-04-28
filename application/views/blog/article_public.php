@@ -1,39 +1,21 @@
 <?php
-$article_url = 'blog/' . $alias . '_' . $id;
+$public_url = 'blog/' . $alias . '_' . $id;
 ?>
 
                      
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"> <?= heading(anchor($article_url, htmlentities($title)), 4); ?>
+                            <div class="panel-heading"> <?= heading(anchor($public_url, htmlentities($title)), 4); ?>
                              </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
                                     <p>
-                                    
+                                    <small>
        
       
-       <?= $author ?>
-       <small>
-       <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
+       <?= $author ?>     
 
-        
-        <?= $this->article_status->label[$status]; ?>
-        </small>
-        
-      <?php endif; ?>
-        <small style="color: red;">
-    <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
-
-        
-        en cours de traitement
-
-    <?php endif; ?>
-        </small>
-      
-      
-
-               
+    </small>           
                         
                                      </p>
                                     <div class="">
@@ -42,7 +24,7 @@ $article_url = 'blog/' . $alias . '_' . $id;
                                     </br>
                         <p>
                         
-                             <?= nl2br(htmlentities($content)); ?>... <?= anchor($article_url, "Lire la suite"); ?>
+                             <?= nl2br(htmlentities($content)); ?>... <?= anchor($public_url, "Lire la suite"); ?>
                         </p>
                                   
                                 

@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <h3 class="box-title">Total de mes demandes</h3>
                                     <ul class="list-inline two-part">
                                         <li><i class="icon-folder-alt text-danger"></i></li>
-                                        <li class="text-right"><span class="counter"><?= $this->listerarticles->num_items; ?></span></li>
+                                        <li class="text-right"><span class="counter"><?= $this->listerarticles->num_itemsDemande; ?></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-danger">
-                                    <h1 class="text-white counter">?</h1>
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsnt; ?></h1>
                                     <p class="text-white">Non encore Traités</p>
                                 </div>
                             </div>

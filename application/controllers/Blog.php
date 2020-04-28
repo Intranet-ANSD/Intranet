@@ -9,14 +9,38 @@ class Blog extends CI_Controller {
     $this->load->model('listerarticles');
     $this->load->model('article_status');
     $this->listerarticles->load($this->auth_user->is_connected);
+    $this->listerarticles->total($this->auth_user->is_connected);
     $this->listerarticles->brouillon($this->auth_user->is_connected);
     $this->listerarticles->NonSoumis($this->auth_user->is_connected);
+    $this->listerarticles->Soumis($this->auth_user->is_connected);
     $this->listerarticles->valider($this->auth_user->is_connected);
     $this->listerarticles->attente($this->auth_user->is_connected);
+    $this->listerarticles->rejeter($this->auth_user->is_connected);
+    $this->listerarticles->validerAg($this->auth_user->is_connected);
+    $this->listerarticles->attenteAg($this->auth_user->is_connected);
+    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
     $data['title'] = "Blog";
     if ($this->auth_user->is_connected)
     {
     $this->load->view('blog/index', $data);
+    }
+    else {
+      $this->load->view('site/connexion');
+    }
+    
+  }
+
+
+  public function articlePublic() {
+    $this->load->helper('html');
+    $this->load->helper('date');
+    $this->load->model('listerarticles');
+    $this->load->model('demande_status');
+    $this->listerarticles->article_public($this->auth_user->is_connected);
+    $data['title'] = "Blog";
+    if ($this->auth_user->is_connected)
+    {
+    $this->load->view('blog/intranet', $data);
     }
     else {
       $this->load->view('site/connexion');
@@ -45,6 +69,14 @@ class Blog extends CI_Controller {
       redirect('blog/index');
     }
   }
+
+
+  
+
+
+    
+
+
 
   public function edition($id = NULL) {
     if (!$this->auth_user->is_connected) {
@@ -85,6 +117,51 @@ class Blog extends CI_Controller {
   }
 
 
+  public function soumettre($id = NULL) {
+    if (!$this->auth_user->is_connected) {
+      redirect('blog/index');
+    }
+    $this->load->helper('html');
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    $this->load->model('article_status');
+    $this->load->model('article');
+    if ($id !== NULL) {
+      if (is_numeric($id)) {
+        $this->article->load($id, TRUE);
+        if (!$this->article->is_found) {
+          redirect('blog/index');
+        }
+      } else {
+        redirect('blog/index');
+      }
+      $data['title'] = "Modification article";
+    } else {
+      $data['title'] = "Nouvel article";
+      $this->article->author_id = $this->auth_user->id;
+    }
+    $this->set_blog_post_validation();
+    if ($this->form_validation->run() == TRUE) {
+      $this->article->content = $this->input->post('content');
+      $this->article->status = $this->input->post('status');
+      $this->article->title = $this->input->post('title');
+      $this->article->save();
+      if ($this->article->is_found) {
+        redirect('blog/' . $this->article->alias . '_' . $this->article->id);
+      }
+    }
+    
+    $this->load->view('blog/index_soumis', $data);
+    
+  }
+
+
+
+
+
+
+
+
   public function traiter($id = NULL) {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
@@ -119,7 +196,7 @@ class Blog extends CI_Controller {
       }
     }
     
-    $this->load->view('blog/index_ajout', $data);
+    $this->load->view('blog/index_traiter', $data);
     
   }
 

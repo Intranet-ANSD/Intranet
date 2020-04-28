@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <h3 class="box-title">Total de mes articles</h3>
                                     <ul class="list-inline two-part">
                                         <li><i class="icon-folder-alt text-danger"></i></li>
-                                        <li class="text-right"><span class="counter"><?= $this->listerarticles->num_items; ?></span></li>
+                                        <li class="text-right"><span class="counter"><?= $this->listerarticles->num_itemsTotal; ?></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-inverse">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsvalide; ?></h1>
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsvalideAg; ?></h1>
                                     <p class="text-white">Validé</p>
                                 </div>
                             </div>
@@ -58,16 +58,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-info">
-                                    <h1 class="counter text-white"><?= $this->listerarticles->num_itemsbrouillon; ?></h1>
-                                    <p class="text-white">Brouillon</p>
+                                    <h1 class="counter text-white"><?= $this->listerarticles->num_itemsattenteAg; ?></h1>
+                                    <p class="text-white">Attente</p>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
                             <div class="col-md-6 col-sm-12">
                                 <div class="white-box text-center bg-danger">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsattente; ?></h1>
-                                    <p class="text-white">En Attente</p>
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsrejeteAg; ?></h1>
+                                    <p class="text-white">Rejeté</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="white-box text-center bg-danger">
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsSoumis; ?></h1>
+                                    <p class="text-white">Soumis</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="white-box text-center bg-danger">
+                                    <h1 class="text-white counter">?</h1>
+                                    <p class="text-white">Rejeté</p>
                                 </div>
                             </div>
                             <!-- /.col -->

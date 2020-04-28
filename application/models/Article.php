@@ -113,6 +113,37 @@ class Article extends CI_Model {
         }
     }
 
+
+    public function load_article_id($id, $show_hidden = FALSE) {
+        $this->clear_data();
+        $this->db
+             ->from('article_username')
+             ->where('id', $id);
+             $this->db->where('status', 'V');
+        if (!$show_hidden) {
+            $this->db->where('status', 'P');
+        }
+        $data = $this->db
+                     ->get()
+                     ->first_row();
+        if ($data !== NULL) {
+            $this->_alias = $data->alias;
+            $this->_author = $data->author;
+            $this->_author_id = $data->author_id;
+            $this->_content = $data->content;
+            $this->_date = $data->date;
+            $this->_id = $data->id;
+            $this->_status = $data->status;
+            $this->_title = $data->title;
+            $this->_image = $data->image;
+        }
+    }
+
+
+
+
+
+
     public function save() {
          
             $data['alias'] = $this->_alias;

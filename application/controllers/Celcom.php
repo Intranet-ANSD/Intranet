@@ -9,9 +9,13 @@ class Celcom extends CI_Controller {
         $this->load->model('listercommunique');
         $this->load->model('listerarticles');
         $this->load->model('demande_status');
+        $this->load->model('article_status');
+        $this->listerarticles->totalD($this->auth_user->is_connected);
+
         $this->listerarticles->demande($this->auth_user->is_connected);
        // $this->listercommunique->load($this->auth_user->is_connected);
         $this->listerarticles->valider($this->auth_user->is_connected);
+        $this->listerarticles->nontraiter($this->auth_user->is_connected);
         $this->listerarticles->rejeter($this->auth_user->is_connected);
         $this->listerarticles->attente($this->auth_user->is_connected);
         $data['title'] = "Celcom";
@@ -42,6 +46,28 @@ class Celcom extends CI_Controller {
         
       }
       */
+
+      public function article_valide($id = NULL) {
+        if (!is_numeric($id)) {
+          redirect('blog/index');
+        }
+        $this->load->helper('html');
+        $this->load->helper('date');
+        $this->load->model('article');
+        $this->load->model('article_status');
+        $this->article->load_article_id($id, $this->auth_user->is_connected);
+        if ($this->article->is_found) {
+          $data['title'] = htmlentities($this->article->title);
+          $data['script'] = '<script src="' . base_url('js/article.js') . '"></script>';
+          
+          $this->load->view('blog/index_article_valide_details', $data);
+          
+        } else {
+          redirect('blog/index');
+        }
+      }
+
+      
 
       public function edition($id = NULL) {
         if (!$this->auth_user->is_connected) {

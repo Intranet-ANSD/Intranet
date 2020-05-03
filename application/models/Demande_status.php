@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//ce modele nous permet de recuperer les status d'un article validé, rejeté et attente.
 class Demande_status {
 
     protected $_status;

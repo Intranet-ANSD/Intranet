@@ -230,7 +230,7 @@ class ListerArticles extends CI_Model {
         $this->_list = $this->db->get()-> result();
     }
 
-
+        //retourne le nombre total d'article d'un agent
     public function total($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -244,7 +244,7 @@ class ListerArticles extends CI_Model {
         }
         $this->_totalArticle = $this->db->get()-> result();
     }
-
+    //retourne la liste des demande traitées et non encore traitées de la celcom de la celcom
     public function totalD($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -260,7 +260,7 @@ class ListerArticles extends CI_Model {
     }
 
 
-
+        //retourne les articles validés par la celcom qui sont visible par tous les agents
     public function article_public($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -277,7 +277,7 @@ class ListerArticles extends CI_Model {
 
 
 
-    
+    // retourne la liste des articles soumis par les agents à la celcom (voir page d'accueil celcom) 
     public function demande($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -310,7 +310,7 @@ class ListerArticles extends CI_Model {
         $this->_listbrouillon = $this->db->get()-> result();
     }
 
-
+        //Charger les articles non soumis dans le compte de l'agent
     public function NonSoumis($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -324,7 +324,8 @@ class ListerArticles extends CI_Model {
         }
         $this->_listNonSoumis = $this->db->get()-> result();
     }
-
+    
+        //Charger les articles Soumis dans le compte de l'agent
     public function Soumis($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -339,7 +340,7 @@ class ListerArticles extends CI_Model {
         $this->_listSoumis = $this->db->get()-> result();
     }
 
-
+    //Charger les articles soumis et non encore traités
     public function nontraiter($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -352,7 +353,7 @@ class ListerArticles extends CI_Model {
         $this->_nt = $this->db->get()-> result();
     }
 
-
+    //Charger les articles validés
     public function valider($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -365,6 +366,7 @@ class ListerArticles extends CI_Model {
         $this->_listvalide = $this->db->get()-> result();
     }
 
+    //Charger les articles rejetés
     public function rejeter($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -377,6 +379,7 @@ class ListerArticles extends CI_Model {
         $this->_listrejete = $this->db->get()-> result();
     }
 
+    //Charger les articles mises en attente
     public function attente($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -389,7 +392,7 @@ class ListerArticles extends CI_Model {
         $this->_listattente = $this->db->get()-> result();
     }
 
-
+    //Charger les articles validés mais dans le compte de l'agent
     public function validerAg($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -403,6 +406,7 @@ class ListerArticles extends CI_Model {
         $this->_listvalideAg = $this->db->get()-> result();
     }
 
+    //Charger les articles rejetés mais dans le compte de l'agent
     public function rejeterAg($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
@@ -415,7 +419,7 @@ class ListerArticles extends CI_Model {
         }
         $this->_listrejeteAg = $this->db->get()-> result();
     }
-
+    //Charger les articles mis en attente mais dans le compte de l'agent
     public function attenteAg($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//ce modele nous permet de recuperer les status d'un article soumis, non soumis et brouillon.
 class Article_status {
 
     protected $_status;

@@ -2,12 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends CI_Controller {
-
+  //Afffiche la contenu principale du compte de tous agent
   public function index() {
     $this->load->helper('html');
     $this->load->helper('date');
     $this->load->model('listerarticles');
     $this->load->model('article_status');
+    //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
     $this->listerarticles->load($this->auth_user->is_connected);
     $this->listerarticles->total($this->auth_user->is_connected);
     $this->listerarticles->brouillon($this->auth_user->is_connected);
@@ -30,10 +31,11 @@ class Blog extends CI_Controller {
     
   }
 
-
+// Affiche les articles validés par la celcom
   public function articlePublic() {
     $this->load->helper('html');
     $this->load->helper('date');
+    //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
     $this->load->model('listerarticles');
     $this->load->model('demande_status');
     $this->listerarticles->article_public($this->auth_user->is_connected);
@@ -49,7 +51,7 @@ class Blog extends CI_Controller {
   }
 
 
-
+  //Fonction  qui permet l'affichage  d'un article par son id cad affichage des details de l'article
   public function article($id = NULL) {
     if (!is_numeric($id)) {
       redirect('blog/index');
@@ -77,7 +79,7 @@ class Blog extends CI_Controller {
     
 
 
-
+  //fonction qui permet d'afficher la page ajouter ou éditer d'un article
   public function edition($id = NULL) {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
@@ -101,6 +103,7 @@ class Blog extends CI_Controller {
       $data['title'] = "Nouvel article";
       $this->article->author_id = $this->auth_user->id;
     }
+    //fonction qui gere la validation des articles voir en bas du controlleur pour plus d'informations
     $this->set_blog_post_validation();
     if ($this->form_validation->run() == TRUE) {
       $this->article->content = $this->input->post('content');
@@ -116,7 +119,7 @@ class Blog extends CI_Controller {
     
   }
 
-
+  //Fonction qui permet de soumettre un article
   public function soumettre($id = NULL) {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
@@ -140,6 +143,7 @@ class Blog extends CI_Controller {
       $data['title'] = "Nouvel article";
       $this->article->author_id = $this->auth_user->id;
     }
+    //fonction qui gere la validation des articles voir en bas du controlleur pour plus d'informations
     $this->set_blog_post_validation();
     if ($this->form_validation->run() == TRUE) {
       $this->article->content = $this->input->post('content');
@@ -161,7 +165,7 @@ class Blog extends CI_Controller {
 
 
 
-
+//Permet de traiter un article soit de le valider de le rejeter ou de le mettre en attente
   public function traiter($id = NULL) {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
@@ -180,11 +184,12 @@ class Blog extends CI_Controller {
       } else {
         redirect('blog/index');
       }
-      $data['title'] = "Modification article";
+      
     } else {
-      $data['title'] = "Nouvel article";
+      
       $this->article->author_id = $this->auth_user->id;
     }
+    //gere la validation des demandes
     $this->set_blog_post_validationD();
     if ($this->form_validation->run() == TRUE) {
       $this->article->content = $this->input->post('content');
@@ -196,7 +201,7 @@ class Blog extends CI_Controller {
       }
     }
     
-    $this->load->view('blog/index_traiter', $data);
+    $this->load->view('blog/index_traiter');
     
   }
 
@@ -236,7 +241,7 @@ class Blog extends CI_Controller {
   }
 
   
-
+// pas encore utilisée
   public function suppression($id = NULL) {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');

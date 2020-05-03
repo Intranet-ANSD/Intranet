@@ -88,7 +88,7 @@ class Article extends CI_Model {
     protected function get_property_image() {
         return $this->_image;
     }
-
+    // permet de recuper l'id d'un article
     public function load($id, $show_hidden = FALSE) {
         $this->clear_data();
         $this->db
@@ -113,7 +113,7 @@ class Article extends CI_Model {
         }
     }
 
-
+    //permet de recuperer l'id d'un article validé
     public function load_article_id($id, $show_hidden = FALSE) {
         $this->clear_data();
         $this->db
@@ -143,7 +143,7 @@ class Article extends CI_Model {
 
 
 
-
+    //fonction pour ajouter ou éditer un article
     public function save() {
          
             $data['alias'] = $this->_alias;
@@ -238,7 +238,7 @@ class Article extends CI_Model {
         $this->_title = $title;
         $this->_alias = $alias;
     }
-
+    //Non utilisé pour le moment
     public function delete() {
         if ($this->is_found) {
             $this->_status = 'N';

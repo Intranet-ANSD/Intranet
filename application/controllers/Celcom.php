@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Celcom extends CI_Controller {
 
+    //Afffiche la contenu principale du compte de tous agent
     public function index() {
         $this->load->helper('html');
         $this->load->helper('date');
@@ -28,25 +29,46 @@ class Celcom extends CI_Controller {
         }
         
       }
-      /*
-      pour communique
-      public function index() {
+      
+      public function accueil_communique() {
         $this->load->helper('html');
         $this->load->helper('date');
         $this->load->model('listercommunique');
+        $categories= $this->listercommunique->viewAllCategories();
         $this->listercommunique->load($this->auth_user->is_connected);
         $data['title'] = "Celcom";
         if ($this->auth_user->is_connected)
         {
-        $this->load->view('blog/index', $data);
+        $this->load->view('celcom/index_communique', ['data' => $data, 'categories' => $categories]);
         }
         else {
           $this->load->view('site/connexion');
         }
         
       }
-      */
 
+
+      //Fonction  qui permet l'affichage  d'un communique par son id cad affichage des details de l'article
+  public function communique($id = NULL) {
+    if (!is_numeric($id)) {
+      redirect('blog/index');
+    }
+    $this->load->helper('html');
+    $this->load->helper('date');
+    $this->load->model('communique');
+    $this->communique->load($id, $this->auth_user->is_connected);
+    if ($this->communique->is_found) {
+      $data['title'] = htmlentities($this->communique->title);
+      $data['script'] = '<script src="' . base_url('js/article.js') . '"></script>';
+      
+      $this->load->view('celcom/communique_details', $data);
+      
+    } else {
+      redirect('blog/index');
+    }
+  }
+      
+      /* Affiche les articles validés en chargeant le modèle load_article_id
       public function article_valide($id = NULL) {
         if (!is_numeric($id)) {
           redirect('blog/index');
@@ -66,9 +88,10 @@ class Celcom extends CI_Controller {
           redirect('blog/index');
         }
       }
+      */
 
       
-
+      // permet d'ajouter ou d'éditer un communiqué
       public function edition($id = NULL) {
         if (!$this->auth_user->is_connected) {
           redirect('blog/index');
@@ -109,6 +132,19 @@ class Celcom extends CI_Controller {
         $this->form_validation->set_rules('title', 'Titre', 'required|max_length[64]');
         $this->form_validation->set_rules('content', 'Contenu', 'required');
          
+        }
+
+
+        public function viewCommuniqueCategories($categorie_id)
+        {
+                $this->load->model('listercommunique');
+                $this->load->helper('html');
+                $communiques = $this->listercommunique->getCategorie($categorie_id);
+                //$data['title'] = htmlentities($communiques->title);
+                $data['script'] = '<script src="' . base_url('js/article.js') . '"></script>';
+                $categories = $this->listercommunique->viewAllCategories();
+                $this->load->view('celcom/viewCommuniqueCategories', ['communiques' => $communiques ,'categories' => $categories,'data' => $data]);
+                
         }
     
 

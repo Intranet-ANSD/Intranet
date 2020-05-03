@@ -36,14 +36,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php if($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
                     <li class="tab-current"><a href=""><?= anchor('blog/index', "Mon compte",['class' => "sticon ti-home"]) ?></a></li>
                     <?php endif;?>    
-                    <li class="tab-current"><a href=""><?= anchor('blog/articlePublic', "Intranet",['class' => "sticon ti-home"]) ?></a></li>                    <li>
-                        <a href="inbox.html" class="waves-effect"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Article<span class="fa arrow"></span><span class="label label-rouded label-danger pull-right">Nouveau</span></span></a>
+
+                        <!--test -->
+                        <li>
+          
+                        <a href="#" class="waves-effect"> <span class="hide-menu">Intranet<span class="fa arrow"></a>
+                        <ul class="nav nav-second-level">
+						<li>
+						<li class="tab-current"><a href=""><?= anchor('blog/articlePublic', "Articles Publiques",['class' => "sticon ti-home"]) ?></a></li>
+                        <li class="tab-current"><a href=""><?= anchor('celcom/accueil_communique', "Communiqués",['class' => "sticon ti-home"]) ?></a></li>
+                    <li>
+                        <a href="inbox.html" class="waves-effect"><i data-icon=")" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Article<span class="fa arrow"></span><span class="label label-rouded label-info pull-right">Nouveau</span></span></a>
                         <ul class="nav nav-second-level">
                         <?php if($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
                             <li><a href=""><?= anchor('celcom/edition', "Nouvel communique"); ?></a></li>
                         <?php endif; ?>
+                        <?php if($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
+                        
                         <li><a href=""><?= anchor('blog/edition', "Nouvel article"); ?></a></li>
-
+                        <?php endif; ?>
                         </ul>
                     </li>
                     <li>
@@ -74,7 +85,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li><a href="chat.html">Ma direction</a></li>
                         </ul>
                     </li>
-                       
+              
+						<li>
+						    </ul>
+                    </li>
+
+                        <!-- fin test -->
+
+
                      
                 </ul>
             </div>

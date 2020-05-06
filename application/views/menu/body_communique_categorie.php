@@ -24,6 +24,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
+
+                <div class="row">
+                <ul>       
+                <?php if(count($categories)): ?>
+                <?php foreach($categories as $categorie): ?>
+                        <li><?php echo anchor("celcom/viewCommuniqueCategories/{$categorie->categorie_id}", "$categorie->nom", ['class'=>'buttons']); ?></li>
+                        
+                <?php endforeach; ?>    
+                <?php else: ?>
+                    <li>
+                        Aucune information disponible
+                    </li>
+
+                <?php endif; ?>    
+                </ul>   
+                        </div>
                 
 
 

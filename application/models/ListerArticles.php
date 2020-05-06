@@ -4,12 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ListerArticles extends CI_Model {
 
     protected $_list;
+    protected $_listv;
+    protected $_listA;
+    protected $_listR;
+    protected $_listS;
     protected $_listbrouillon;
     protected $_listNonSoumis;
     protected $_listSoumis;
     protected $_nt;
     protected $_listattente;
     protected $_listvalide;
+    protected $_listattentecelcom;
+    protected $_listrejetecelcom;
     protected $_listrejete;
     protected $_listattenteAg;
     protected $_listvalideAg;
@@ -22,13 +28,19 @@ class ListerArticles extends CI_Model {
     public function __construct() {
         parent::__construct();
         $this->_list = [];
+        $this->_listv = [];
+        $this->_listA = [];
+        $this->_listR = [];
+        $this->_listS = [];
         $this->_listbrouillon = [];
         $this->_listNonSoumis = [];
         $this->_listSoumis = [];
         $this->_nt = [];
         $this->_listattente = [];
+        $this->_listattentecelcom = [];
         $this->_listvalide = [];
         $this->_listrejete = [];
+        $this->_listrejetecelcom = [];
         $this->_listattenteAg = [];
         $this->_listvalideAg = [];
         $this->_listrejeteAg = [];
@@ -49,6 +61,22 @@ class ListerArticles extends CI_Model {
         return count($this->_list) > 0;
     }
 
+    protected function get_property_has_itemsv() {
+        return count($this->_listv) > 0;
+    }
+
+    protected function get_property_has_itemsA() {
+        return count($this->_listA) > 0;
+    }
+
+    protected function get_property_has_itemsR() {
+        return count($this->_listR) > 0;
+    }
+
+    protected function get_property_has_itemsS() {
+        return count($this->_listS) > 0;
+    }
+
     protected function get_property_has_itemsTotal() {
         return count($this->_totalArticle) > 0;
     }
@@ -59,6 +87,10 @@ class ListerArticles extends CI_Model {
 
     protected function get_property_has_itemsattente() {
         return count($this->_listattente) > 0;
+    }
+
+    protected function get_property_has_itemsattentecelcom() {
+        return count($this->_listattentecelcom) > 0;
     }
 
     protected function get_property_has_itemsattenteAg() {
@@ -76,6 +108,11 @@ class ListerArticles extends CI_Model {
     protected function get_property_has_itemsrejete() {
         return count($this->_listrejete) > 0;
     }
+
+    protected function get_property_has_itemsrejetecelcom() {
+        return count($this->_listrejetecelcom) > 0;
+    }
+
 
     protected function get_property_has_itemsrejeteAg() {
         return count($this->_listrejeteAg) > 0;
@@ -114,6 +151,10 @@ class ListerArticles extends CI_Model {
             return $this->_listattente;
         }
 
+        protected function get_property_itemsattentecelcom() {
+            return $this->_listattentecelcom;
+        }
+
         protected function get_property_itemsattenteAg() {
             return $this->_listattenteAg;
         }
@@ -130,6 +171,10 @@ class ListerArticles extends CI_Model {
             return $this->_listrejete;
         }
 
+        protected function get_property_itemsrejetecelcom() {
+            return $this->_listrejetecelcom;
+        }
+
         protected function get_property_itemsrejeteAg() {
             return $this->_listrejeteAg;
         }
@@ -139,6 +184,22 @@ class ListerArticles extends CI_Model {
         return $this->_list;
     }
 
+    //retourne la liste des articles
+    protected function get_property_itemsv() {
+        return $this->_listv;
+    }
+
+    protected function get_property_itemsA() {
+        return $this->_listA;
+    }
+
+    protected function get_property_itemsR() {
+        return $this->_listR;
+    }
+
+    protected function get_property_itemsS() {
+        return $this->_listS;
+    }
     //retourne la liste des articles "brouillon"
     protected function get_property_itemsbrouillon() {
         return $this->_listbrouillon;
@@ -160,6 +221,22 @@ class ListerArticles extends CI_Model {
     //le nombre d'articles
     protected function get_property_num_items() {
         return count($this->_list);
+    }
+
+    protected function get_property_num_itemsv() {
+        return count($this->_listv);
+    }
+
+    protected function get_property_num_itemsA() {
+        return count($this->_listA);
+    }
+
+    protected function get_property_num_itemsR() {
+        return count($this->_listR);
+    }
+
+    protected function get_property_num_itemsS() {
+        return count($this->_listS);
     }
 
     
@@ -191,6 +268,11 @@ class ListerArticles extends CI_Model {
         return count($this->_listattente);
     }
 
+    protected function get_property_num_itemsattentecelcom() {
+        return count($this->_listattentecelcom);
+    }
+
+
     protected function get_property_num_itemsattenteAg() {
         return count($this->_listattenteAg);
     }
@@ -207,6 +289,10 @@ class ListerArticles extends CI_Model {
         return count($this->_listrejete);
     }
 
+    protected function get_property_num_itemsrejetecelcom() {
+        return count($this->_listrejetecelcom);
+    }
+
     protected function get_property_num_itemsrejeteAg() {
         return count($this->_listrejeteAg);
     }
@@ -214,7 +300,7 @@ class ListerArticles extends CI_Model {
 
 
     //Charger tous les articles
-    public function load($show_hidden = FALSE) {
+    public function load() {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
                  ->from('article_username')
                  -> order_by('date', 'DESC');
@@ -223,11 +309,56 @@ class ListerArticles extends CI_Model {
                  $this->db->where_in('status', $names);
                  
 
-        if (!$show_hidden) {
-            $this->db->where('status', 'N');
-           
-        }
+        
         $this->_list = $this->db->get()-> result();
+    }
+
+    public function lesvalides() {
+        $this->db->select("id, title, alias, content, date,image, status, author ")
+                 ->from('article_username')
+                 -> order_by('date', 'DESC');
+                 $this->db->where('author', $this->session->auth_user['username']);
+                 $this->db->where('status', 'V');
+                 
+
+        
+        $this->_listv = $this->db->get()-> result();
+    }
+
+    public function lesattentes() {
+        $this->db->select("id, title, alias, content, date,image, status, author ")
+                 ->from('article_username')
+                 -> order_by('date', 'DESC');
+                 $this->db->where('author', $this->session->auth_user['username']);
+                 $this->db->where('status', 'A');
+                 
+
+        
+        $this->_listA = $this->db->get()-> result();
+    }
+
+    public function lesrejets() {
+        $this->db->select("id, title, alias, content, date,image, status, author ")
+                 ->from('article_username')
+                 -> order_by('date', 'DESC');
+                 $this->db->where('author', $this->session->auth_user['username']);
+                 $this->db->where('status', 'R');
+                 
+
+        
+        $this->_listR = $this->db->get()-> result();
+    }
+
+    public function lessoumis() {
+        $this->db->select("id, title, alias, content, date,image, status, author ")
+                 ->from('article_username')
+                 -> order_by('date', 'DESC');
+                 $this->db->where('author', $this->session->auth_user['username']);
+                 $this->db->where('status', 'S');
+                 
+
+        
+        $this->_listS = $this->db->get()-> result();
     }
 
         //retourne le nombre total d'article d'un agent
@@ -298,7 +429,7 @@ class ListerArticles extends CI_Model {
 
     //Charger les articles brouillons
     public function brouillon($show_hidden = FALSE) {
-        $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
+        $this->db->select("id, title, alias, content, date,image, status, author ")
                  ->from('article_username')
                  -> order_by('date', 'DESC');
                  $this->db->where('author', $this->session->auth_user['username']);
@@ -379,6 +510,9 @@ class ListerArticles extends CI_Model {
         $this->_listrejete = $this->db->get()-> result();
     }
 
+
+    
+
     //Charger les articles mises en attente
     public function attente($show_hidden = FALSE) {
         $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image, status, author ")
@@ -391,6 +525,9 @@ class ListerArticles extends CI_Model {
         }
         $this->_listattente = $this->db->get()-> result();
     }
+
+
+    
 
     //Charger les articles validés mais dans le compte de l'agent
     public function validerAg($show_hidden = FALSE) {

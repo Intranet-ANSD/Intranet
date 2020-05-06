@@ -3,13 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends CI_Controller {
   //Afffiche la contenu principale du compte de tous agent
-  public function index() {
+  public function index($offset=0) {
+
     $this->load->helper('html');
     $this->load->helper('date');
     $this->load->model('listerarticles');
     $this->load->model('article_status');
+        //pagignation 
+
+        $this->load->library('pagination');
+        $config['base_url'] = "http://localhost/stat/index.php/blog/index";
+        //$config['base_url'] = site_url('blog/index');;
+        $config['total_rows'] = $this->listerarticles->load();
+        $config['per_page'] = 5;
+        $config['reuse_query_string'] = TRUE;
+    
+        // fin pagination 
     //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
-    $this->listerarticles->load($this->auth_user->is_connected);
+    $this->listerarticles->load($config['per_page'],$offset, $this->auth_user->is_connected);
+    $this->pagination->initialize($config);
     $this->listerarticles->total($this->auth_user->is_connected);
     $this->listerarticles->brouillon($this->auth_user->is_connected);
     $this->listerarticles->NonSoumis($this->auth_user->is_connected);
@@ -274,8 +286,151 @@ class Blog extends CI_Controller {
   }
 
 
-  
 
+  public function listevalide() {
+
+    $this->load->helper('html');
+    $this->load->helper('date');
+    $this->load->model('listerarticles');
+    $this->load->model('demande_status');
+    $this->listerarticles->lesvalides($this->auth_user->is_connected);
+    $this->listerarticles->total($this->auth_user->is_connected);
+    $this->listerarticles->brouillon($this->auth_user->is_connected);
+    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
+    $this->listerarticles->Soumis($this->auth_user->is_connected);
+    $this->listerarticles->valider($this->auth_user->is_connected);
+    $this->listerarticles->attente($this->auth_user->is_connected);
+    $this->listerarticles->rejeter($this->auth_user->is_connected);
+    $this->listerarticles->validerAg($this->auth_user->is_connected);
+    $this->listerarticles->attenteAg($this->auth_user->is_connected);
+    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
+    $data['title'] = "Blog";
+    if ($this->auth_user->is_connected)
+    {
+    $this->load->view('blog/index_lesvalides', $data);
+    }
+    else {
+      $this->load->view('site/connexion');
+    }
+    
+  }
+
+  public function listeAttente() {
+
+    $this->load->helper('html');
+    $this->load->helper('date');
+    $this->load->model('listerarticles');
+    $this->load->model('demande_status');
+    $this->listerarticles->lesattentes($this->auth_user->is_connected);
+    $this->listerarticles->total($this->auth_user->is_connected);
+    $this->listerarticles->brouillon($this->auth_user->is_connected);
+    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
+    $this->listerarticles->Soumis($this->auth_user->is_connected);
+    $this->listerarticles->valider($this->auth_user->is_connected);
+    $this->listerarticles->attente($this->auth_user->is_connected);
+    $this->listerarticles->rejeter($this->auth_user->is_connected);
+    $this->listerarticles->validerAg($this->auth_user->is_connected);
+    $this->listerarticles->attenteAg($this->auth_user->is_connected);
+    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
+    $data['title'] = "Blog";
+    if ($this->auth_user->is_connected)
+    {
+    $this->load->view('blog/index_les_attentes', $data);
+    }
+    else {
+      $this->load->view('site/connexion');
+    }
+    
+  }
+
+
+  public function listerejet() {
+
+    $this->load->helper('html');
+    $this->load->helper('date');
+    $this->load->model('listerarticles');
+    $this->load->model('demande_status');
+    $this->listerarticles->lesrejets($this->auth_user->is_connected);
+    $this->listerarticles->total($this->auth_user->is_connected);
+    $this->listerarticles->brouillon($this->auth_user->is_connected);
+    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
+    $this->listerarticles->Soumis($this->auth_user->is_connected);
+    $this->listerarticles->valider($this->auth_user->is_connected);
+    $this->listerarticles->attente($this->auth_user->is_connected);
+    $this->listerarticles->rejeter($this->auth_user->is_connected);
+    $this->listerarticles->validerAg($this->auth_user->is_connected);
+    $this->listerarticles->attenteAg($this->auth_user->is_connected);
+    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
+    $data['title'] = "Blog";
+    if ($this->auth_user->is_connected)
+    {
+    $this->load->view('blog/index_les_rejets', $data);
+    }
+    else {
+      $this->load->view('site/connexion');
+    }
+    
+  }
+
+  public function listesoumis() {
+
+    $this->load->helper('html');
+    $this->load->helper('date');
+    $this->load->model('listerarticles');
+    $this->load->model('article_status');
+    $this->listerarticles->lessoumis($this->auth_user->is_connected);
+    $this->listerarticles->total($this->auth_user->is_connected);
+    $this->listerarticles->brouillon($this->auth_user->is_connected);
+    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
+    $this->listerarticles->Soumis($this->auth_user->is_connected);
+    $this->listerarticles->valider($this->auth_user->is_connected);
+    $this->listerarticles->attente($this->auth_user->is_connected);
+    $this->listerarticles->rejeter($this->auth_user->is_connected);
+    $this->listerarticles->validerAg($this->auth_user->is_connected);
+    $this->listerarticles->attenteAg($this->auth_user->is_connected);
+    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
+    $data['title'] = "Blog";
+    if ($this->auth_user->is_connected)
+    {
+    $this->load->view('blog/index_les_soumis', $data);
+    }
+    else {
+      $this->load->view('site/connexion');
+    }
+    
+  }
+
+  public function lesbrouillons() {
+
+    $this->load->helper('html');
+    $this->load->helper('date');
+    $this->load->model('listerarticles');
+    $this->load->model('article_status');
+    $this->listerarticles->brouillon($this->auth_user->is_connected);
+    $this->listerarticles->total($this->auth_user->is_connected);
+    $this->listerarticles->brouillon($this->auth_user->is_connected);
+    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
+    $this->listerarticles->Soumis($this->auth_user->is_connected);
+    $this->listerarticles->valider($this->auth_user->is_connected);
+    $this->listerarticles->attente($this->auth_user->is_connected);
+    $this->listerarticles->rejeter($this->auth_user->is_connected);
+    $this->listerarticles->validerAg($this->auth_user->is_connected);
+    $this->listerarticles->attenteAg($this->auth_user->is_connected);
+    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
+    $data['title'] = "Blog";
+    if ($this->auth_user->is_connected)
+    {
+    $this->load->view('blog/index_les_brouillons', $data);
+    }
+    else {
+      $this->load->view('site/connexion');
+    }
+    
+  }
+
+  //celcom
+
+  
 
 
 }

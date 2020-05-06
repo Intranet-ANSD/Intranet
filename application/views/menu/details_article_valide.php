@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   
                                 
                             </div>
-                                <div class="panel-footer">   <?= nice_date($this->article->date, 'd/m/Y'); ?> </div>
+                                <div class="panel-footer">   <?= $this->article->date; ?> </div>
                         </div>
                     </div>
                     

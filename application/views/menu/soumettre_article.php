@@ -25,6 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                   <span class="help-block"><?= form_error('content'); ?></span>
                                               </div>
                                                             </div>  
+
+                                                            
                                                             <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
 
                                                              <div class="form-group">

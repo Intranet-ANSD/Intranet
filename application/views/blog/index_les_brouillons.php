@@ -51,8 +51,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php $this->load->view('menu/sidebar.php') ?>
         <!-- Left navbar-header end -->
         <!-- Page Content -->
-        <?php $this->load->view('menu/body_communique_par_categorie') ?>
-       
+        <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'admin' || $this->session->auth_user['username'] == 'Abdoul') : ?>
+        <?php $this->load->view('menu/body_les_brouillon') ?>
+        <?php endif; ?>
+        <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
+        <?php $this->load->view('menu/body_celcom') ?>
+        <?php endif; ?>
+
         <!--pour les articles -->
          
         <!--Fin articles -->

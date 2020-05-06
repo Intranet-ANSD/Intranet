@@ -24,7 +24,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <?= form_textarea(['name' => "content", 'id' => "content", 'class' => 'form-control'], set_value('content', $this->communique->content)) ?>
                                                   <span class="help-block"><?= form_error('content'); ?></span>
                                               </div>
-                                                            </div>  
+                                                            </div>
+
+                                                            <div class="form-group">
+                                        <?= form_label("Categorie&nbsp;:", "categorie", ['class' => "col-md-2 control-label"]) ?>
+                                             <div class="col-md-10 <?= empty(form_error('categorie')) ? "" : "has-error" ?>">
+                                             <select class="col-lg-9" name="categorie_id">
+
+                                                    <option value="">Select</option>
+                                                    <?php if(count($categories)): ?>
+                                                    <?php foreach($categories as $categorie): ?>
+                                                        <option value=<?php echo $categorie->categorie_id ?>><?php echo $categorie->nom ?></option>
+                                                    <?php endforeach; ?>                    
+                                                    <?php endif; ?> 
+                                              </select>
+                                                  <span class="help-block"><?= form_error('categorie'); ?></span>
+                                              </div>
+                                                            </div> 
+
 
                                                               <div class="form-group">
 		                                    	<div class="row">

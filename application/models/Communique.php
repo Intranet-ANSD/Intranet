@@ -111,6 +111,7 @@ class Communique extends CI_Model {
             $data['author_id'] = $this->_author_id;
             $data['content'] = $this->input->post('content');
             $data['title'] = $this->input->post('title');
+            $data['categorie_id'] = $this->input->post('categorie_id');
                     
                         
                    

@@ -15,21 +15,9 @@ $article_url = 'blog/' . $alias . '_' . $id;
       
        <?= $author ?>
        <small>
-       <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
-
         
-        <?= $this->article_status->label[$status]; ?>
-        </small>
+        <?= $this->demande_status->label[$status]; ?>
         
-      <?php endif; ?>
-        <small style="color: red;">
-    <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
-
-        
-        en cours de traitement
-
-    <?php endif; ?>
-        </small>
       
       
 

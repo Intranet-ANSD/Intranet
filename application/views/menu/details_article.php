@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                          <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
                          <?= anchor('blog/index', "Liste des articles") ?>
             <?= anchor(['blog', 'edition', $this->article->id], "Modifier") ?>
-            <?= anchor(['blog/soumettre',$this->article->id], "soumettre mon article") ?>
+            <?= anchor(['blog/soumettre',$this->article->id], "soumettre") ?>
                          <?php endif; ?>
                          <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
                           <?= anchor(['blog', 'traiter', $this->article->id], "Traiter Article") ?>
@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   
                                 
                             </div>
-                                <div class="panel-footer">   <?= nice_date($this->article->date, 'd/m/Y'); ?> </div>
+                                <div class="panel-footer">   <?= $this->article->date; ?> </div>
                         </div>
                     </div>
                     

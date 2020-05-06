@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <!-- /.col -->
                     
-                        <div class="row">
+                    <div class="row">
                             <!-- .col -->
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
@@ -79,7 +79,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
                                     <h1 class="text-white counter"><?= $this->listerarticles->num_itemsBrouillon; ?></h1>
-    <p class="text-white"> <?= anchor('blog/lesbrouillons', "Brouillons", array('class' => 'text-white')); ?></p>   
+    <p class="text-white"> <?= anchor('blog/lesbrouillons', "Brouillons", array('class' => 'text-white')); ?></p>       
+
+                                </div>
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
@@ -93,14 +95,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="">
                 <div class="row">
                     
-                <?php if ($this->listerarticles->has_items) : ?>
-                                 <?php foreach($this->listerarticles->items as $article) {
-                                     $this->load->view('blog/article_resume', $article);
+                <?php if ($this->listerarticles->has_itemsA) : ?>
+                                 <?php foreach($this->listerarticles->itemsA as $article) {
+                                     $this->load->view('blog/article_resume_att', $article);
                                      
                                  }
                                   
                                     ?>
-                                    <?php echo $this->pagination->create_links();?>
+                                    
                                   <?php else: ?>
                                          <div class="col-md-12">
                                         <p class="alert alert-warning" role="alert">

@@ -100,6 +100,8 @@ class Celcom extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('communique');
+        $this->load->model('listercommunique');
+        $categories = $this->listercommunique->getCategories();
         if ($id !== NULL) {
           if (is_numeric($id)) {
             $this->communique->load($id, TRUE);
@@ -124,13 +126,14 @@ class Celcom extends CI_Controller {
           }
         }
         
-        $this->load->view('celcom/ajout_communique', $data);
+        $this->load->view('celcom/ajout_communique', ['data' => $data , 'categories' => $categories]);
         
       }
 
       protected function set_blog_post_validation() {
         $this->form_validation->set_rules('title', 'Titre', 'required|max_length[64]');
         $this->form_validation->set_rules('content', 'Contenu', 'required');
+        $this->form_validation->set_rules('categorie_id', 'Categorie', 'required');
          
         }
 
@@ -143,9 +146,81 @@ class Celcom extends CI_Controller {
                 //$data['title'] = htmlentities($communiques->title);
                 $data['script'] = '<script src="' . base_url('js/article.js') . '"></script>';
                 $categories = $this->listercommunique->viewAllCategories();
-                $this->load->view('celcom/viewCommuniqueCategories', ['communiques' => $communiques ,'categories' => $categories,'data' => $data]);
+                $this->load->view('celcom/index_communique_categories', ['communiques' => $communiques ,'categories' => $categories,'data' => $data]);
                 
         }
+
+
+        public function listevalideCelcom() {
+          $this->load->helper('html');
+          $this->load->helper('date');
+          //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
+          $this->load->model('listerarticles');
+          $this->load->model('demande_status');
+          $this->listerarticles->totalD($this->auth_user->is_connected);
+          $this->listerarticles->valider($this->auth_user->is_connected);
+          $this->listerarticles->nontraiter($this->auth_user->is_connected);
+          $this->listerarticles->rejeter($this->auth_user->is_connected);
+          $this->listerarticles->attente($this->auth_user->is_connected);
+          $this->listerarticles->article_public($this->auth_user->is_connected);
+          $data['title'] = "Blog";
+          if ($this->auth_user->is_connected)
+          {
+          $this->load->view('blog/index_valide_celcom', $data);
+          }
+          else {
+            $this->load->view('site/connexion');
+          }
+          
+        }
+      
+        public function listeAttenteCelcom() {
+          $this->load->helper('html');
+          $this->load->helper('date');
+          //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
+          
+          $this->load->model('listerarticles');
+          $this->load->model('demande_status');
+          $this->listerarticles->totalD($this->auth_user->is_connected);
+          $this->listerarticles->valider($this->auth_user->is_connected);
+          $this->listerarticles->nontraiter($this->auth_user->is_connected);
+          $this->listerarticles->rejeter($this->auth_user->is_connected);
+          $this->listerarticles->attente($this->auth_user->is_connected);
+          $this->listerarticles->attente($this->auth_user->is_connected);
+          $data['title'] = "Blog";
+          if ($this->auth_user->is_connected)
+          {
+          $this->load->view('blog/index_attente_celcom', $data);
+          }
+          else {
+            $this->load->view('site/connexion');
+          }
+          
+        }
+      
+        public function listeRejetCelcom() {
+          $this->load->helper('html');
+          $this->load->helper('date');
+          //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
+          $this->load->model('listerarticles');
+          $this->load->model('demande_status');
+          $this->listerarticles->totalD($this->auth_user->is_connected);
+          $this->listerarticles->valider($this->auth_user->is_connected);
+          $this->listerarticles->nontraiter($this->auth_user->is_connected);
+          $this->listerarticles->rejeter($this->auth_user->is_connected);
+          $this->listerarticles->attente($this->auth_user->is_connected);
+          $this->listerarticles->rejeter($this->auth_user->is_connected);
+          $data['title'] = "Blog";
+          if ($this->auth_user->is_connected)
+          {
+          $this->load->view('blog/index_rejet_celcom', $data);
+          }
+          else {
+            $this->load->view('site/connexion');
+          }
+          
+        }
+      
     
 
 }

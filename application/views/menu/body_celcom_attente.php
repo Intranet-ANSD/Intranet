@@ -5,12 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Mon Compte</h4>
+                        <h4 class="page-title">Celcom</h4>
                     </div>
                             <!--Formulaire d'ajout d'un article -->
                             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                          <ol class="breadcrumb">
-                         <li class="box-label"><a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><?= anchor('blog/edition', "Nouvel article"); ?></a></li>
+                         <li class="box-label"><a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><?= anchor('celcom/edition', "Nouveau communique"); ?></a></li>
 
                         </ol>
                     </div>
@@ -28,10 +28,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-md-6 col-sm-2 col-xs-2">
                     <div class="col-md-6 col-sm-2">
                                 <div class="white-box">
-                                    <h3 class="box-title">Total de mes articles</h3>
+                                    <h3 class="box-title">Total de mes demandes</h3>
                                     <ul class="list-inline two-part">
-                                        <li><i class="material-icons" style="font-size:48px;color:blue">speaker_notes</i></li>
-                                        <li class="text-right"><span class="counter"><?= $this->listerarticles->num_itemsTotal; ?></span></li>
+                                        <li><i class="material-icons" style="font-size:48px;color:blue">speaker_notes</i></i></li>
+                                        <li class="text-right"><span class="counter"><?= $this->listerarticles->num_itemsDemande; ?></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -42,44 +42,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- .col -->
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsNonSoumis; ?></h1>
-    <p class="text-white"> <?= anchor('blog/index', "Non Soumis", array('class' => 'text-white')); ?></p> 
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsvalide; ?></h1>
+                   <p class="text-white"> <?= anchor('celcom/listevalideCelcom', "Validé", array('class' => 'text-white')); ?></p>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsvalideAg; ?></h1>
-   <p class="text-white"> <?= anchor('blog/listevalide', "Validé", array('class' => 'text-white')); ?></p>
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsattente; ?></h1>
+                   <p class="text-white"> <?= anchor('celcom/listeAttenteCelcom', "En Attente", array('class' => 'text-white')); ?></p>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
-                                    <h1 class="counter text-white"><?= $this->listerarticles->num_itemsattenteAg; ?></h1>
-    <p class="text-white"> <?= anchor('blog/listeAttente', "En Attente", array('class' => 'text-white')); ?></p>
+                                    <h1 class="counter text-white"><?= $this->listerarticles->num_itemsrejete; ?></h1>
+                   <p class="text-white"> <?= anchor('celcom/listeRejetCelcom', "Rejeté", array('class' => 'text-white')); ?></p>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsrejeteAg; ?></h1>
-    <p class="text-white"> <?= anchor('blog/listerejet', "Rejeté", array('class' => 'text-white')); ?></p>                                
+                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsnt; ?></h1>
+                   <p class="text-white"> <?= anchor('celcom/index', "En cours de traitement", array('class' => 'text-white')); ?></p>
                                 </div>
-                            </div>
-                            <div class="col-md-2 col-sm-2">
-                                <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsSoumis; ?></h1>
-    <p class="text-white"> <?= anchor('blog/listesoumis', "Soumis", array('class' => 'text-white')); ?></p>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-sm-2">
-                                <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsBrouillon; ?></h1>
-    <p class="text-white"> <?= anchor('blog/lesbrouillons', "Brouillons", array('class' => 'text-white')); ?></p>   
                             </div>
                             <!-- /.col -->
                             <!-- .col -->
@@ -89,31 +78,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     
                     
                 </div>
+
                  
-            <div class="">
+                <div class="">
                 <div class="row">
                     
-                <?php if ($this->listerarticles->has_items) : ?>
-                                 <?php foreach($this->listerarticles->items as $article) {
-                                     $this->load->view('blog/article_resume', $article);
+                <?php if ($this->listerarticles->has_itemsattente) : ?>
+                                 <?php foreach($this->listerarticles->itemsattente as $article) {
+                                     $this->load->view('blog/article_resume_celcom', $article);
                                      
                                  }
-                                  
+                                 
                                     ?>
-                                    <?php echo $this->pagination->create_links();?>
+                                   
                                   <?php else: ?>
                                          <div class="col-md-12">
                                         <p class="alert alert-warning" role="alert">
-                                                Il n'y a encore aucun article.
+                                                Il n'y a encore aucune demande.
                                         </p>
                                          </div>
                                   <?php endif; ?>
                   </div>
                     
 
-            </div>       
-                                    
-           
+            </div>   
+  
                  
                 
                  

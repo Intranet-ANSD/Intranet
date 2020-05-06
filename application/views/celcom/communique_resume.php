@@ -32,7 +32,7 @@ $communique_url = 'celcom/' . $alias . '_' . $id;
                                   
                                 
                                    </div>
-                                <div class="panel-footer">  <?= nice_date($date, 'd/m/Y'); ?> </div>
+                                <div class="panel-footer">  <?= $date; ?> </div>
                             </div>
                         </div>
                     </div>

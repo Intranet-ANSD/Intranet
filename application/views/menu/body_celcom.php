@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
                                     <h1 class="text-white counter"><?= $this->listerarticles->num_itemsvalide; ?></h1>
-                                    <p class="text-white">Validés</p>
+                   <p class="text-white"> <?= anchor('celcom/listevalideCelcom', "Validé", array('class' => 'text-white')); ?></p>
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
                                     <h1 class="text-white counter"><?= $this->listerarticles->num_itemsattente; ?></h1>
-                                    <p class="text-white">En attente</p>
+                   <p class="text-white"> <?= anchor('celcom/listeAttenteCelcom', "En Attente", array('class' => 'text-white')); ?></p>
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
                                     <h1 class="counter text-white"><?= $this->listerarticles->num_itemsrejete; ?></h1>
-                                    <p class="text-white">Rejeté</p>
+                   <p class="text-white"> <?= anchor('celcom/listeRejetCelcom', "Rejeté", array('class' => 'text-white')); ?></p>
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -67,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-2 col-sm-2">
                                 <div class="white-box text-center bg-primary">
                                     <h1 class="text-white counter"><?= $this->listerarticles->num_itemsnt; ?></h1>
-                                    <p class="text-white">Non encore traités</p>
+                   <p class="text-white"> <?= anchor('celcom/index', "En cours de traitement", array('class' => 'text-white')); ?></p>
                                 </div>
                             </div>
                             <!-- /.col -->

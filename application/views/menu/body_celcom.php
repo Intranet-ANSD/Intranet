@@ -23,61 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 <!-- /.row -->
                 
-                <div class="row">
-                    <!-- .col -->
-                    <div class="col-md-6 col-sm-2 col-xs-2">
-                    <div class="col-md-6 col-sm-2">
-                                <div class="white-box">
-                                    <h3 class="box-title">Total de mes demandes</h3>
-                                    <ul class="list-inline two-part">
-                                        <li><i class="material-icons" style="font-size:48px;color:blue">speaker_notes</i></i></li>
-                                        <li class="text-right"><span class="counter"><?= $this->listerarticles->num_itemsDemande; ?></span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                    </div>
-                    <!-- /.col -->
-                    
-                        <div class="row">
-                            <!-- .col -->
-                            <div class="col-md-2 col-sm-2">
-                                <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsvalide; ?></h1>
-                   <p class="text-white"> <?= anchor('celcom/listevalideCelcom', "Validé", array('class' => 'text-white')); ?></p>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <!-- .col -->
-                            <div class="col-md-2 col-sm-2">
-                                <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsattente; ?></h1>
-                   <p class="text-white"> <?= anchor('celcom/listeAttenteCelcom', "En Attente", array('class' => 'text-white')); ?></p>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <!-- .col -->
-                            <div class="col-md-2 col-sm-2">
-                                <div class="white-box text-center bg-primary">
-                                    <h1 class="counter text-white"><?= $this->listerarticles->num_itemsrejete; ?></h1>
-                   <p class="text-white"> <?= anchor('celcom/listeRejetCelcom', "Rejeté", array('class' => 'text-white')); ?></p>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <!-- .col -->
-                            <div class="col-md-2 col-sm-2">
-                                <div class="white-box text-center bg-primary">
-                                    <h1 class="text-white counter"><?= $this->listerarticles->num_itemsnt; ?></h1>
-                   <p class="text-white"> <?= anchor('celcom/index', "En cours de traitement", array('class' => 'text-white')); ?></p>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <!-- .col -->
-                           
-                            <!-- /.col -->
-                        </div>
-                    
-                    
-                </div>
+               
                  
             <div class="">
                 <div class="row">

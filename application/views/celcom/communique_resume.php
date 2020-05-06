@@ -15,7 +15,7 @@ $communique_url = 'celcom/' . $alias . '_' . $id;
       
       <?php if ($this->auth_user->is_connected) : ?>
         
-     par: <?= $author ?>
+     par: <?= $author ?> 
         
       <?php endif; ?>
     </small>           

@@ -58,7 +58,7 @@ class ListerCommunique extends CI_Model {
     
     //Charger tous les communiqués
     public function load($show_hidden = FALSE) {
-        $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content, date,image,author ")
+        $this->db->select("id, title, alias, SUBSTRING_INDEX(content, ' ', 20) AS content,categorie_id, date,image,author ")
                  ->from('communique_username')
                  -> order_by('date', 'DESC');
                  

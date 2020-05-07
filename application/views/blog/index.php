@@ -51,10 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php $this->load->view('menu/sidebar.php') ?>
         <!-- Left navbar-header end -->
         <!-- Page Content -->
-        <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'admin' || $this->session->auth_user['username'] == 'Abdoul') : ?>
+        <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'agent_simple') : ?>
         <?php $this->load->view('menu/body') ?>
         <?php endif; ?>
-        <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
+        <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'celcom') : ?>
         <?php $this->load->view('menu/body_celcom') ?>
         <?php endif; ?>
 

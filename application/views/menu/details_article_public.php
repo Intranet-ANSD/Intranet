@@ -9,14 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                          <ol class="breadcrumb">
-                         <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'agent_simple') : ?>
-                         <?= anchor('blog/index', "Liste des articles") ?>
-            <?= anchor(['blog', 'edition', $this->article->id], "Modifier") ?>
-            <?= anchor(['blog/soumettre',$this->article->id], "soumettre") ?>
-                         <?php endif; ?>
-                         <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'celcom') : ?>
-                          <?= anchor(['blog', 'traiter', $this->article->id], "Traiter Article") ?>
-                         <?php endif; ?>
+                         
                         </ol>
                         </div>
                      

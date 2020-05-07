@@ -6,6 +6,7 @@ class Auth_user extends CI_Model {
     protected $_username;
     protected $_id;
     protected $_profil_id;
+    protected $_profil_nom;
 
     public function __construct() {
         parent::__construct();
@@ -25,6 +26,8 @@ class Auth_user extends CI_Model {
         $this->_id = NULL;
         $this->_username = NULL;
         $this->_profil_id = NULL;
+        $this->_profil_nom = NULL;
+        
     }
 
     protected function clear_session() {
@@ -48,11 +51,17 @@ class Auth_user extends CI_Model {
     protected function get_property_profil_id() {
         return $this->_profil_id;
     }
+
+    protected function get_property_profil_nom() {
+        return $this->_profil_nom;
+    }
+
     protected function load_from_session() {
         if ($this->session->auth_user) {
             $this->_id = $this->session->auth_user['id'];
             $this->_username = $this->session->auth_user['username'];
             $this->_profil_id = $this->session->auth_user['profil_id'];
+            $this->_profil_nom = $this->session->auth_user['profil_nom'];
         } else {
             $this->clear_data();
         }
@@ -60,8 +69,8 @@ class Auth_user extends CI_Model {
 
     protected function load_user( $username) {
         return $this->db
-                    ->select('id, username, password')
-                    ->from('login')
+                    ->select('id, username, password, profil_id, profil_nom')
+                    ->from('profil_username')
                     ->where('username', $username)
                     //->where('profil_id', 'A')
                     ->get()
@@ -74,6 +83,7 @@ class Auth_user extends CI_Model {
             $this->_id = $user->id;
             $this->_username = $user->username;
             $this->_profil_id = $user->profil_id;
+            $this->_profil_nom = $user->profil_nom;
             $this->save_session();
         } else {
             $this->logout();
@@ -89,7 +99,8 @@ class Auth_user extends CI_Model {
         $this->session->auth_user = [
             'id' => $this->_id,
             'username' => $this->_username,
-            'profil_id' => $this->_profil_id
+            'profil_id' => $this->_profil_id,
+            'profil_nom' => $this->_profil_nom
         ];
     }
 }

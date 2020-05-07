@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!--Formulaire d'ajout d'un article -->
                             <div class="col-lg-12 col-sm-8 col-md-8 col-xs-12">
                          <ol class="breadcrumb">
-                         <li class="box-label"><a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><?= anchor('blog/edition', "Nouvel article"); ?></a></li>
+                         <li class="box-label"><a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><?= anchor('celcom/edition', "Nouveau communique"); ?></a></li>
 
                         </ol>
                     </div>
@@ -23,32 +23,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 <!-- /.row -->
                 
-               
-                 
-            <div class="">
+                
+
+
+                <div class="">
                 <div class="row">
                     
-                <?php if ($this->listerarticles->has_itemsv) : ?>
-                                 <?php foreach($this->listerarticles->itemsv as $article) {
-                                     $this->load->view('blog/article_resume_val', $article);
+                <?php if ($this->listercommunique->has_itemsC) : ?>
+                                 <?php foreach($this->listercommunique->itemsc as $communique) {
+                                     $this->load->view('celcom/communique_liste_resume', $communique);
                                      
                                  }
-                                  
+                                 
                                     ?>
-                                    
+                                   
                                   <?php else: ?>
                                          <div class="col-md-12">
                                         <p class="alert alert-warning" role="alert">
-                                                Il n'y a encore aucun article.
+                                                Il n'y a encore aucune demande.
                                         </p>
                                          </div>
                                   <?php endif; ?>
                   </div>
                     
 
-            </div>       
-                                    
-           
+            </div>   
+  
                  
                 
                  

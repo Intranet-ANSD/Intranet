@@ -37,9 +37,9 @@ class Site extends My_Controller {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $this->auth_user->login( $username, $password);
-            if(($this->auth_user->is_connected && $this->session->auth_user['username'] == 'admin' || $this->session->auth_user['username'] == 'Abdoul')) {
+            if(($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'agent_simple')) {
                 redirect('blog/index');
-            } else if(($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe')) {
+            } else if(($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'celcom')) {
                 redirect('celcom/index');
             }
             else{

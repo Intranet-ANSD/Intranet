@@ -1,39 +1,24 @@
 <?php
-$article_url = 'blog/' . $alias . '_' . $id;
+$communique_url = 'celcom/' . $alias . '_' . $id;
 ?>
 
                      
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading panel"> <?= heading(anchor($article_url, htmlentities($title)), 4); ?>
+                            <div class="panel-heading"> <?= heading(anchor($communique_url, htmlentities($title)), 4); ?>
                              </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
                                     <p>
-                                    
+                                    <small>
        
       
-       <?= $author ?>
-       <small>
-       <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'agent_simple') : ?>
-
+      <?php if ($this->auth_user->is_connected) : ?>
         
-        <?= $this->article_status->label[$status]; ?>
-        </small>
+     par: <?= $author ?> 
         
       <?php endif; ?>
-        <small style="color: red;">
-    <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'celcom') : ?>
-
-        
-        en cours de traitement
-
-    <?php endif; ?>
-        </small>
-      
-      
-
-               
+    </small>           
                         
                                      </p>
                                     <div class="">
@@ -42,7 +27,7 @@ $article_url = 'blog/' . $alias . '_' . $id;
                                     </br>
                         <p>
                         
-                             <?= nl2br(htmlentities($content)); ?>... <?= anchor($article_url, "Lire la suite"); ?>
+                             <?= nl2br(htmlentities($content)); ?>... <?= anchor($communique_url, "Lire la suite"); ?>
                         </p>
                                   
                                 

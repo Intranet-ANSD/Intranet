@@ -2,13 +2,38 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends CI_Controller {
+  public function __construct()
+       {
+            parent::__construct();
+        $this->load->helper('html');
+        $this->load->helper('date');
+        $this->load->helper('form');
+        $this->load->model('listercommunique');
+        $this->load->model('listerarticles');
+        $this->load->model('demande_status');
+        $this->load->model('article_status');
+          $this->listerarticles->total($this->auth_user->is_connected);
+          $this->listerarticles->brouillon($this->auth_user->is_connected);
+          $this->listerarticles->NonSoumis($this->auth_user->is_connected);
+          $this->listerarticles->Soumis($this->auth_user->is_connected);
+          $this->listerarticles->valider($this->auth_user->is_connected);
+          $this->listerarticles->attente($this->auth_user->is_connected);
+          $this->listerarticles->rejeter($this->auth_user->is_connected);
+          $this->listerarticles->validerAg($this->auth_user->is_connected);
+          $this->listerarticles->attenteAg($this->auth_user->is_connected);
+          $this->listerarticles->rejeterAg($this->auth_user->is_connected);
+          $this->listerarticles->load($this->auth_user->is_connected);
+          $this->listerarticles->lessoumis($this->auth_user->is_connected);
+          $this->listerarticles->lesvalides($this->auth_user->is_connected);
+          $this->listerarticles->lesrejets($this->auth_user->is_connected);
+          $this->listerarticles->lesattentes($this->auth_user->is_connected);
+
+
+      }
   //Afffiche la contenu principale du compte de tous agent
   public function index($offset=0) {
 
-    $this->load->helper('html');
-    $this->load->helper('date');
-    $this->load->model('listerarticles');
-    $this->load->model('article_status');
+    
         //pagignation 
 
         $this->load->library('pagination');
@@ -22,17 +47,8 @@ class Blog extends CI_Controller {
     //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
     $this->listerarticles->load($config['per_page'],$offset, $this->auth_user->is_connected);
     $this->pagination->initialize($config);
-    $this->listerarticles->total($this->auth_user->is_connected);
-    $this->listerarticles->brouillon($this->auth_user->is_connected);
-    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
-    $this->listerarticles->Soumis($this->auth_user->is_connected);
-    $this->listerarticles->valider($this->auth_user->is_connected);
-    $this->listerarticles->attente($this->auth_user->is_connected);
-    $this->listerarticles->rejeter($this->auth_user->is_connected);
-    $this->listerarticles->validerAg($this->auth_user->is_connected);
-    $this->listerarticles->attenteAg($this->auth_user->is_connected);
-    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
-    $data['title'] = "Blog";
+    
+    $data['title'] = "Page Principale";
     if ($this->auth_user->is_connected)
     {
     $this->load->view('blog/index', $data);
@@ -43,24 +59,7 @@ class Blog extends CI_Controller {
     
   }
 
-// Affiche les articles validés par la celcom
-  public function articlePublic() {
-    $this->load->helper('html');
-    $this->load->helper('date');
-    //les fonctions appelées ici sont décrites dans le modele.Consulter le modele pour avoir plus d'informations
-    $this->load->model('listerarticles');
-    $this->load->model('demande_status');
-    $this->listerarticles->article_public($this->auth_user->is_connected);
-    $data['title'] = "Blog";
-    if ($this->auth_user->is_connected)
-    {
-    $this->load->view('blog/intranet', $data);
-    }
-    else {
-      $this->load->view('site/connexion');
-    }
-    
-  }
+
 
 
   //Fonction  qui permet l'affichage  d'un article par son id cad affichage des details de l'article
@@ -68,10 +67,9 @@ class Blog extends CI_Controller {
     if (!is_numeric($id)) {
       redirect('blog/index');
     }
-    $this->load->helper('html');
-    $this->load->helper('date');
+    
     $this->load->model('article');
-    $this->load->model('article_status');
+    
     $this->article->load($id, $this->auth_user->is_connected);
     if ($this->article->is_found) {
       $data['title'] = htmlentities($this->article->title);
@@ -96,10 +94,9 @@ class Blog extends CI_Controller {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
     }
-    $this->load->helper('html');
-    $this->load->helper('form');
+    
     $this->load->library('form_validation');
-    $this->load->model('article_status');
+    
     $this->load->model('article');
     if ($id !== NULL) {
       if (is_numeric($id)) {
@@ -111,11 +108,24 @@ class Blog extends CI_Controller {
         redirect('blog/index');
       }
       $data['title'] = "Modification article";
+       //fonction qui gere la validation des articles voir en bas du controlleur pour plus d'informations
+    $this->set_blog_post_validation();
+    if ($this->form_validation->run() == TRUE) {
+      $this->article->content = $this->input->post('content');
+      $this->article->status = $this->input->post('status');
+      $this->article->title = $this->input->post('title');
+      $this->article->save();
+      if ($this->article->is_found) {
+        redirect('blog/' . $this->article->alias . '_' . $this->article->id);
+      }
+    }
+    
+    $this->load->view('blog/index_modify_article', $data);
+
     } else {
       $data['title'] = "Nouvel article";
       $this->article->author_id = $this->auth_user->id;
-    }
-    //fonction qui gere la validation des articles voir en bas du controlleur pour plus d'informations
+       //fonction qui gere la validation des articles voir en bas du controlleur pour plus d'informations
     $this->set_blog_post_validation();
     if ($this->form_validation->run() == TRUE) {
       $this->article->content = $this->input->post('content');
@@ -128,6 +138,8 @@ class Blog extends CI_Controller {
     }
     
     $this->load->view('blog/index_ajout', $data);
+    }
+   
     
   }
 
@@ -136,10 +148,9 @@ class Blog extends CI_Controller {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
     }
-    $this->load->helper('html');
-    $this->load->helper('form');
+    
     $this->load->library('form_validation');
-    $this->load->model('article_status');
+    
     $this->load->model('article');
     if ($id !== NULL) {
       if (is_numeric($id)) {
@@ -182,10 +193,8 @@ class Blog extends CI_Controller {
     if (!$this->auth_user->is_connected) {
       redirect('blog/index');
     }
-    $this->load->helper('html');
-    $this->load->helper('form');
+    
     $this->load->library('form_validation');
-    $this->load->model('demande_status');
     $this->load->model('article');
     if ($id !== NULL) {
       if (is_numeric($id)) {
@@ -289,22 +298,7 @@ class Blog extends CI_Controller {
 
   public function listevalide() {
 
-    $this->load->helper('html');
-    $this->load->helper('date');
-    $this->load->model('listerarticles');
-    $this->load->model('demande_status');
-    $this->listerarticles->lesvalides($this->auth_user->is_connected);
-    $this->listerarticles->total($this->auth_user->is_connected);
-    $this->listerarticles->brouillon($this->auth_user->is_connected);
-    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
-    $this->listerarticles->Soumis($this->auth_user->is_connected);
-    $this->listerarticles->valider($this->auth_user->is_connected);
-    $this->listerarticles->attente($this->auth_user->is_connected);
-    $this->listerarticles->rejeter($this->auth_user->is_connected);
-    $this->listerarticles->validerAg($this->auth_user->is_connected);
-    $this->listerarticles->attenteAg($this->auth_user->is_connected);
-    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
-    $data['title'] = "Blog";
+    $data['title'] = "Listes des articles validés";
     if ($this->auth_user->is_connected)
     {
     $this->load->view('blog/index_lesvalides', $data);
@@ -316,23 +310,7 @@ class Blog extends CI_Controller {
   }
 
   public function listeAttente() {
-
-    $this->load->helper('html');
-    $this->load->helper('date');
-    $this->load->model('listerarticles');
-    $this->load->model('demande_status');
-    $this->listerarticles->lesattentes($this->auth_user->is_connected);
-    $this->listerarticles->total($this->auth_user->is_connected);
-    $this->listerarticles->brouillon($this->auth_user->is_connected);
-    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
-    $this->listerarticles->Soumis($this->auth_user->is_connected);
-    $this->listerarticles->valider($this->auth_user->is_connected);
-    $this->listerarticles->attente($this->auth_user->is_connected);
-    $this->listerarticles->rejeter($this->auth_user->is_connected);
-    $this->listerarticles->validerAg($this->auth_user->is_connected);
-    $this->listerarticles->attenteAg($this->auth_user->is_connected);
-    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
-    $data['title'] = "Blog";
+    $data['title'] = "Liste des articles en attente";
     if ($this->auth_user->is_connected)
     {
     $this->load->view('blog/index_les_attentes', $data);
@@ -346,22 +324,7 @@ class Blog extends CI_Controller {
 
   public function listerejet() {
 
-    $this->load->helper('html');
-    $this->load->helper('date');
-    $this->load->model('listerarticles');
-    $this->load->model('demande_status');
-    $this->listerarticles->lesrejets($this->auth_user->is_connected);
-    $this->listerarticles->total($this->auth_user->is_connected);
-    $this->listerarticles->brouillon($this->auth_user->is_connected);
-    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
-    $this->listerarticles->Soumis($this->auth_user->is_connected);
-    $this->listerarticles->valider($this->auth_user->is_connected);
-    $this->listerarticles->attente($this->auth_user->is_connected);
-    $this->listerarticles->rejeter($this->auth_user->is_connected);
-    $this->listerarticles->validerAg($this->auth_user->is_connected);
-    $this->listerarticles->attenteAg($this->auth_user->is_connected);
-    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
-    $data['title'] = "Blog";
+    $data['title'] = "Liste des articles rejetés";
     if ($this->auth_user->is_connected)
     {
     $this->load->view('blog/index_les_rejets', $data);
@@ -374,22 +337,8 @@ class Blog extends CI_Controller {
 
   public function listesoumis() {
 
-    $this->load->helper('html');
-    $this->load->helper('date');
-    $this->load->model('listerarticles');
-    $this->load->model('article_status');
-    $this->listerarticles->lessoumis($this->auth_user->is_connected);
-    $this->listerarticles->total($this->auth_user->is_connected);
-    $this->listerarticles->brouillon($this->auth_user->is_connected);
-    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
-    $this->listerarticles->Soumis($this->auth_user->is_connected);
-    $this->listerarticles->valider($this->auth_user->is_connected);
-    $this->listerarticles->attente($this->auth_user->is_connected);
-    $this->listerarticles->rejeter($this->auth_user->is_connected);
-    $this->listerarticles->validerAg($this->auth_user->is_connected);
-    $this->listerarticles->attenteAg($this->auth_user->is_connected);
-    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
-    $data['title'] = "Blog";
+  
+    $data['title'] = "Liste des articles soumis";
     if ($this->auth_user->is_connected)
     {
     $this->load->view('blog/index_les_soumis', $data);
@@ -402,22 +351,8 @@ class Blog extends CI_Controller {
 
   public function lesbrouillons() {
 
-    $this->load->helper('html');
-    $this->load->helper('date');
-    $this->load->model('listerarticles');
-    $this->load->model('article_status');
-    $this->listerarticles->brouillon($this->auth_user->is_connected);
-    $this->listerarticles->total($this->auth_user->is_connected);
-    $this->listerarticles->brouillon($this->auth_user->is_connected);
-    $this->listerarticles->NonSoumis($this->auth_user->is_connected);
-    $this->listerarticles->Soumis($this->auth_user->is_connected);
-    $this->listerarticles->valider($this->auth_user->is_connected);
-    $this->listerarticles->attente($this->auth_user->is_connected);
-    $this->listerarticles->rejeter($this->auth_user->is_connected);
-    $this->listerarticles->validerAg($this->auth_user->is_connected);
-    $this->listerarticles->attenteAg($this->auth_user->is_connected);
-    $this->listerarticles->rejeterAg($this->auth_user->is_connected);
-    $data['title'] = "Blog";
+    
+    $data['title'] = "Liste des brouillons";
     if ($this->auth_user->is_connected)
     {
     $this->load->view('blog/index_les_brouillons', $data);

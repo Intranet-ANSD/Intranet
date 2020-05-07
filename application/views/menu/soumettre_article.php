@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             </div>  
 
                                                             
-                                                            <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
+                                                            <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'agent_simple') : ?>
 
                                                              <div class="form-group">
                                          <?= form_label("Statut&nbsp;:", "status", ['class' => "col-md-2 control-label"]) ?>
@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                               </div>
                                                             <?php endif; ?>
 
-                                                            <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
+                                                            <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'celcom') : ?>
 
                                                                 <div class="form-group">
                                          <?= form_label("Statut&nbsp;:", "status", ['class' => "col-md-2 control-label"]) ?>

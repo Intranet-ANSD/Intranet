@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row bg-title">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Mon Compte</h4>
+                    <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12">
+                        <h6 class="page-title"><?= heading($title); ?></h6>
                     </div>
                             <!--Formulaire d'ajout d'un article -->
-                            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                            <div class="col-lg-12 col-sm-8 col-md-8 col-xs-12">
                          <ol class="breadcrumb">
                          <li class="box-label"><a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><?= anchor('blog/edition', "Nouvel article"); ?></a></li>
 

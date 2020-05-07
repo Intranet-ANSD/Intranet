@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 
                 <ul class="nav navbar-top-links navbar-left hidden-xs">
                     <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
-                    <?php if($this->auth_user->is_connected && $this->session->auth_user['username'] != 'mor talla kebe') : ?>
+                    <?php if($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'agent_simple') : ?>
 
                     <!-- /.dropdown -->
                     <li class="dropdown">
@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li>
                                 <a href="#">
                                     <div>
-                                        <p> <strong>Total</strong> <span class="pull-right text-muted"><?= $this->listerarticles->num_itemsTotal; ?></span> </p>
+                                        <p> <strong>Total</strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsTotal; ?></span> </p>
                                         <div class="progress progress-striped active">
                                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
                                         </div>
@@ -40,12 +40,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li>
                                 
                                     <div>
-                                    <h3> <strong><?= anchor('blog/index', "Non Soumis"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsNonSoumis; ?>&nbsp&nbsp</span> </h3>
-                                    <h3> <strong><?= anchor('blog/listevalide', "Validé"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsvalideAg; ?>&nbsp&nbsp</span> </h3>
-                                    <h3> <strong><?= anchor('blog/listeAttente', "En Attente"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsattenteAg; ?>&nbsp&nbsp</span> </h3>
-                                    <h3> <strong><?= anchor('blog/listerejet', "Rejeté"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsrejeteAg; ?>&nbsp&nbsp</span> </h3>   
-                                    <h3> <strong><?= anchor('blog/lesbrouillons', "Brouillons"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsBrouillon; ?>&nbsp&nbsp</span> </h3>
-                                    <h3> <strong><?= anchor('blog/listesoumis', "Soumis"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsSoumis; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('blog/index', "Non Soumis"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsNonSoumis; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('blog/listevalide', "Validé"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsvalideAg; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('blog/listeAttente', "En Attente"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsattenteAg; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('blog/listerejet', "Rejeté"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsrejeteAg; ?>&nbsp&nbsp</span> </h3>   
+                                    <h3> <strong><?= anchor('blog/lesbrouillons', "Brouillons"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsBrouillon; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('blog/listesoumis', "Soumis"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsSoumis; ?>&nbsp&nbsp</span> </h3>
 
                                       
                                    </div>
@@ -66,18 +66,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <!-- dropdown celcom -->
 
-                    <?php if ($this->auth_user->is_connected && $this->session->auth_user['username'] == 'mor talla kebe') : ?>
-
+                    <?php if ($this->auth_user->is_connected && $this->session->auth_user['profil_nom'] == 'celcom') : ?>
+                        
                         <li class="dropdown">
+                                    
                         <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
-                            <i class="icon-note"></i>
+                            <i class="icon-note">Tableau de bord</i>                            
+       
                             <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
                         </a>
+            
                         <ul class="dropdown-menu dropdown-tasks animated slideInUp">
                             <li>
                                 <a href="#">
                                     <div>
-                                        <p> <strong>Total</strong> <span class="pull-right text-muted"><?= $this->listerarticles->num_itemsDemande; ?></span> </p>
+                                        <p> <strong>Total</strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsDemande; ?></span> </p>
                                         <div class="progress progress-striped active">
                                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
                                         </div>
@@ -89,10 +92,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li>
                                 
                                     <div>
-                                    <h3> <strong><?= anchor('celcom/listevalideCelcom', "Validé"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsvalide; ?>&nbsp&nbsp</span> </h3>
-                                    <h3> <strong><?= anchor('celcom/listeAttenteCelcom', "En Attente"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsattente; ?>&nbsp&nbsp</span> </h3>
-                                    <h3> <strong><?= anchor('celcom/listeRejetCelcom', "Rejeté"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsrejete; ?>&nbsp&nbsp</span> </h3>
-                                    <h3> <strong><?= anchor('celcom/index', "En cours de traitement"); ?></strong> <span class="pull-right text-muted" style="color: blue;"><?= $this->listerarticles->num_itemsnt; ?>&nbsp&nbsp</span> </h3>   
+                                    <h3> <strong><?= anchor('celcom/listevalideCelcom', "Validé"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsvalide; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('celcom/listeAttenteCelcom', "En Attente"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsattente; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('celcom/listeRejetCelcom', "Rejeté"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsrejete; ?>&nbsp&nbsp</span> </h3>
+                                    <h3> <strong><?= anchor('celcom/index', "En cours de traitement"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listerarticles->num_itemsnt; ?></span> </h3>
+                                    <h3> <strong><?= anchor('celcom/listecommunique', "Communiqués"); ?></strong> <span class="label label-rouded label-info pull-right"><?= $this->listercommunique->num_itemsC; ?></span> </h3>   
                                     
 
                                       

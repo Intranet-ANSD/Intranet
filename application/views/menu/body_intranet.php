@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Page d'accueil de l'intranet</h4>
+                        <h6 class="page-title"><?= heading($title); ?></h6>
                     </div>
                             <!--Formulaire d'ajout d'un article -->
                             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">

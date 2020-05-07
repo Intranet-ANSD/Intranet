@@ -52,8 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		                                    	<div class="row">
 				                            <label class="col-md-3">Image</label>
 				                                    <div class="col-md-9">
-                                                    <input type='file' class="form-control" name="image" onChange="readURL(this);" /required>
-                                                    <img id="blah" src="<?php echo base_url(); ?>uploads/" alt="" height="200" width="200"/>
+                                                    <?= form_input(['name' => "image", 'id' => "image", 'class' => 'form-control'], set_value('image', $this->article->image)) ?>
+                                                   
 				                                    </div>
 				                                         <div class="clearfix"></div>
 		                                    	</div>

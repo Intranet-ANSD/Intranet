@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Vos communiqués</h4>
+                        <h4 class="page-title">Liste des publications</h4>
                         
                         
 
